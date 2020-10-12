@@ -40,18 +40,6 @@ export const eventHandlers = {
         button.addEventListener("click", e => eventHandlers.onEditCardClickEventHandler(e));
     },
     onEditCardClickEventHandler: function (e) {
-        console.log("Klick");
-        e.target.style.display = "none";
-        e.target.parentNode.getElementsByClassName("card-description")[0].contentEditable = true;
-        let btn = document.createElement("button");
-        btn.class = "edit-done-button";
-        btn.innerHTML = "Done";
-        e.target.parentNode.append(btn);
-        btn.addEventListener("click", function()
-        {
-            e.target.parentNode.getElementsByClassName("card-description")[0].contentEditable = false;
-            e.target.parentNode.removeChild(btn);
-            e.target.style.display = "block";
-        })
+        page.editCard(e);
     }
 }
