@@ -40,39 +40,6 @@ export const page = {
                     <div class="enter-card">
                         <button class="add-card-button">+ Lägg till ett kort</button>
                     </div>
-                    <div class="card">
-                        <p>Ett litet cardtest med lite text och lite text till</p>
-                    </div>
-                    <div class="card">
-                        <p>Ytterligare ett litet cardtest med lite text</p>
-                    </div>
-                    <div class="card">
-                        <p>Löksås ipsum redan omfångsrik häst tid fram bäckasiner, jäst annat kom vidsträckt regn
-                            som samma, av så hav göras stora redan. </p>
-                    </div>
-                    <div class="card">
-                        <p>Sorgliga strand nya bäckasiner av genom miljoner groda åker annan där helt omfångsrik
-                            dimma, </p>
-                    </div>
-                    <div class="card">
-                        <p>Omfångsrik strand bra vi år dimmhöljd träutensilierna sitt, ser faktor rännil sjö ännu
-                            ta.</p>
-                    </div>
-                    <div class="card">
-                        <p>Ännu ett litet cardtest med text</p>
-                    </div>
-                    <div class="card">
-                        <p>Löksås ipsum redan omfångsrik häst tid fram bäckasiner, jäst annat kom vidsträckt regn
-                            som samma, av så hav göras stora redan. </p>
-                    </div>
-                    <div class="card">
-                        <p>Sorgliga strand nya bäckasiner av genom miljoner groda åker annan där helt omfångsrik
-                            dimma, </p>
-                    </div>
-                    <div class="card">
-                        <p>Omfångsrik strand bra vi år dimmhöljd träutensilierna sitt, ser faktor rännil sjö ännu
-                            ta.</p>
-                    </div>
                 </div>
                 <div id="doing-column" class="column">
                     <header class="column-header">
@@ -89,21 +56,7 @@ export const page = {
                     <div class="enter-card">
                         <button class="add-card-button">+ Lägg till ett kort</button>
                     </div>
-                    <div class="card">
-                        <p>Ännu ett litet cardtest med text</p>
-                    </div>
-                    <div class="card">
-                        <p>Löksås ipsum redan omfångsrik häst tid fram bäckasiner, jäst annat kom vidsträckt regn
-                            som samma, av så hav göras stora redan. </p>
-                    </div>
-                    <div class="card">
-                        <p>Sorgliga strand nya bäckasiner av genom miljoner groda åker annan där helt omfångsrik
-                            dimma, </p>
-                    </div>
-                    <div class="card">
-                        <p>Omfångsrik strand bra vi år dimmhöljd träutensilierna sitt, ser faktor rännil sjö ännu
-                            ta.</p>
-                    </div>
+                   
                 </div>
                 <div id="done-column" class="column">
                     <header class="column-header">
@@ -123,17 +76,27 @@ export const page = {
     addCard: function (e) {
         const card = document.createElement("div");
         card.setAttribute("class", "card");
+
         const button = document.createElement("button");
         button.setAttribute("class", "delete-card-btn");
         button.innerText = "X";
         eventHandlers.addOnDeleteCardClickEventHandler(button);
+
+        const editButton = document.createElement("button");
+        editButton.setAttribute("class", "edit-card-button");
+        editButton.innerText = "Edit";
+        eventHandlers.addEditCardEventHandler(editButton);
+
         const par = document.createElement("p");
         par.setAttribute("class", "card-description");
         par.innerText = `
         Nytt kort. ID: ${new Date().getTime()}
         `;
-        card.append(button, par);
+        card.append(button, par, editButton);
         e.target.parentNode.append(card);
+
+       // child.getElementsByClassName("edit-card-button")[0].addEventListener("click", e => eventHandlers.onEditCardClickEventHandler(e));
+
     },
     deleteCard: function(e) {
         e.target.parentNode.remove();
