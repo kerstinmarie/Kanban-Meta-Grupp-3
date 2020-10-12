@@ -32,7 +32,7 @@ export const page = {
     </header>
     <main>
         <div class="main">
-            <div class="flex-container float-left">
+            <div class="column-container">
                 <div id="todo-column" class="column">
                     <header class="column-header">
                         <h3>Todo</h3>
