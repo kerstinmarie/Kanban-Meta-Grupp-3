@@ -94,12 +94,26 @@ export const page = {
         `;
         card.append(button, par, editButton);
         e.target.parentNode.append(card);
-
-       // child.getElementsByClassName("edit-card-button")[0].addEventListener("click", e => eventHandlers.onEditCardClickEventHandler(e));
-
     },
     deleteCard: function(e) {
         e.target.parentNode.remove();
+    },
+    editCard: function(e)
+    {
+        e.target.style.display = "none";
+        let parentText = e.target.parentNode.getElementsByClassName("card-description")[0];
+        parentText.contentEditable = true;
+        let btn = document.createElement("button");
+        btn.class = "edit-done-button";
+        btn.innerHTML = "Done";
+        e.target.parentNode.append(btn);
+        parentText.focus();
+        btn.addEventListener("click", function()
+        {
+            parentText.contentEditable = false;
+            e.target.parentNode.removeChild(btn);
+            e.target.style.display = "block";
+        })
     }
 
 }
