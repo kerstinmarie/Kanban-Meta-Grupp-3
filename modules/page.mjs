@@ -1,6 +1,6 @@
 export const page = {
-    getFrontPage: function(){
-        return  `
+    getFrontPage: function () {
+        return `
         <header class="page-header">
         <div class="logo-keeeper"><h2 class="logotext">Kanban bräda</h2></div>
    </header>
@@ -20,9 +20,9 @@ export const page = {
         </main>
    <footer class="footer"></footer>
    `
-},
-    getBoardPage: function(){
-        return  `
+    },
+    getBoardPage: function () {
+        return `
         <header class="page-header">
         <div class="logo-keeeper">
             <h2 class="logotext">Kanban bräda</h2>
@@ -117,5 +117,6 @@ export const page = {
     <footer class="footer">
     </footer>
 `
-    }
+    },
+    
 }

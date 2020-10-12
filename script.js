@@ -1,28 +1,12 @@
 import { page } from './modules/page.mjs';
 import { data } from './modules/data.mjs';
+import { eventHandlers } from './modules/eventHandlers.mjs';
 
 document.body.onload = script;
 
-function script(){
+function script() {
     //document.getElementById("wrapper").innerHTML = page.getFrontPage();
     document.getElementById("wrapper").innerHTML = page.getBoardPage();
-    addOnAddCardClickEventHandlers();
+    eventHandlers.addOnAddCardClickEventHandlers();                          //Lägger till event handlers på alla "lägg till nytt kort"-knappar.
 
-}
-
-
-
-
-////work in progress add cards anthon
-function addOnAddCardClickEventHandlers() {
-    console.log("add card");
-    const addCardBtns = document.getElementsByClassName("add-card-button");
-    Object.keys(addCardBtns).forEach(key=>{
-        addCardBtns[key].addEventListener("click", e=>onAddCardClickEventHandler(e))
-        console.log(addCardBtns[key]);
-    });
-}
-
-function onAddCardClickEventHandler(e){
-    alert("click",e.target);
 }
