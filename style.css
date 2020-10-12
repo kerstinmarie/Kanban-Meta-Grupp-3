@@ -56,32 +56,33 @@ input, button {
 /************
 Basic
 ************/
-/*columner #ebecf0, card #ffffff, bakgrund #0079bf*/
 body{
    background-color: #ffffff;
    font-family: 'Helvetica Neue', Calibri, sans-serif;
    color: #444444;
 }
 h1,h2,h3{
-   font-family: 'Literata', serif;
+   font-family: 'Bitter', serif;
 }
 h1{
-   font-size: 1.5em;
+   font-size: 2.5rem;
    font-weight: 700;
-   margin-bottom: 20px;
    line-height: 1.5em;
+   text-align: center;
+   margin: 20px 0 30px 0;
+   color: #0079bf;
 }
 h2{
-   font-size: 0.95em;
+   font-size: 0.95rem;
    text-align: left;
    font-weight: 700;
    line-height: 1.3em;
 }
 h3{
-   font-size: 0.95em;
+   font-size: 0.95rem;
    text-align: left;
    font-weight: 700;
-   line-height: 1.3em;
+   line-height: 1.3rem;
 }
 p{
    font-size: 1rem;
@@ -98,17 +99,18 @@ header.page-header{
    height: 80px;
    padding: 20px 6% 0 6%;
    background-color:#A4A4AB;
+   background-image: linear-gradient(180deg, #01314d, #0079bf);
 }
 .logo-keeper{
    width: 150px;
    margin: auto;
 }
-.logotext{
+h2.logotext {
+   font-family:'Anton', sans-serif;
    text-align: center;
-   font-weight: 700;
-   font-style: italic;
-   font-size: 3rem;
-   color: #0079bf;
+   font-weight: 400;
+   font-size: 2.5rem;
+   color: #ffffff;
 }
 /************
 Main
@@ -119,18 +121,52 @@ Main
    background-color: #0079bf;
    overflow: hidden;
 }
-/*.flex-container{
-   display: flex;
-   width: 76%;
-   flex-wrap: nowrap; 
-   margin: 0 auto;
-   overflow: visible;
-}*/
-.float-left{
+.login-container{
+   height: auto;
+   width: 30%;
+   margin: 200px auto 375px auto;
+   padding: 20px 4% 55px 4%;
+   border-radius: 7px;
+   background-color:#ebecf0;
+}
+label{
+   display: inline-block;
+   color: #0079bf;
+   font-size: 1.2rem;
+   font-weight: 700;
+}
+input#username,
+input#password{
+   display: inline-block;
+   width: 97%;
+   padding: 8px 0 8px 2%;
+   background-color:#ebecf0;
+   border-bottom: 2px solid #0079bf;
+   margin: 10px 0;
+   outline: none;
+   font-size: 0.95rem;
+}
+button#login-button{
+   display: block;
+   margin-top: 10px;
+   padding: 10px;
+   border-radius: 20px;
+   color: #ffffff;
+   font-weight: bold;
+   width: 100%;
+   background-image: linear-gradient(0deg, #01314d, #0079bf);
+   font-size: 1rem;
+   cursor: pointer;
+   outline: none;
+}
+button#login-button:hover{
+   background-image: linear-gradient(#0079bf, #0079bf);
+}
+.column-container{
    /*width: 78%;*/
    float: left;
    width: 1255px;
-   margin: 0 12%;
+   margin: 0;
 }
 .column{
    float: left;
@@ -174,14 +210,23 @@ Footer
 ************/
 .footer{
    clear: both;
-   height: 5px;
+   height: 50px;
    padding: 0 6%;
    margin-bottom: 10px;
-   background-color:#A4A4AB;
+   background-image: linear-gradient(0deg, #01314d, #0079bf);
 }
 
 
 
+
+
+
+
+/* ADD CARD BUTTON */
+
+.add-card-button{
+outline: none;
+}
 
 
 
