@@ -8,5 +8,5 @@ function script() {
     //document.getElementById("wrapper").innerHTML = page.getFrontPage();
     document.getElementById("wrapper").innerHTML = page.getBoardPage();
     eventHandlers.addOnAddCardClickEventHandlers();                          //Lägger till event handlers på alla "lägg till nytt kort"-knappar.
-
+    eventHandlers.addEditCardClickEventHandlers();
 }
