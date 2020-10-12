@@ -222,6 +222,13 @@ button#login-button:hover{
 .delete-card-btn:hover{
    color: orangered;
 }
+.edit-card-button, .edit-done-button{
+   font-size: 12px;
+   font-weight: bold;
+   position: absolute;
+   right: 10px;
+   bottom: 5px;
+}
 
 /************
 Footer

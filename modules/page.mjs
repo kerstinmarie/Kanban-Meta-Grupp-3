@@ -106,7 +106,7 @@ export const page = {
             let parentText = e.target.parentNode.getElementsByClassName("card-description")[0];
             parentText.contentEditable = true;
             let btn = document.createElement("button");
-            btn.class = "edit-done-button";
+            btn.setAttribute("class", "edit-done-button");
             btn.innerHTML = "Done";
             e.target.parentNode.append(btn);
             parentText.focus();
