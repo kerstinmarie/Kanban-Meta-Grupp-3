@@ -1,3 +1,5 @@
+import { eventHandlers } from "./eventHandlers.mjs";
+
 export const page = {
     getFrontPage: function () {
         return `
@@ -71,5 +73,33 @@ export const page = {
     </footer>
 `
     },
-    
+    addCard: function (e) {
+        const card = document.createElement("div");
+        card.setAttribute("class", "card");
+
+        const button = document.createElement("button");
+        button.setAttribute("class", "delete-card-btn");
+        button.innerText = "X";
+        eventHandlers.addOnDeleteCardClickEventHandler(button);
+
+        const editButton = document.createElement("button");
+        editButton.setAttribute("class", "edit-card-button");
+        editButton.innerText = "Edit";
+        eventHandlers.addEditCardEventHandler(editButton);
+
+        const par = document.createElement("p");
+        par.setAttribute("class", "card-description");
+        par.innerText = `
+        Nytt kort. ID: ${new Date().getTime()}
+        `;
+        card.append(button, par, editButton);
+        e.target.parentNode.append(card);
+
+       // child.getElementsByClassName("edit-card-button")[0].addEventListener("click", e => eventHandlers.onEditCardClickEventHandler(e));
+
+    },
+    deleteCard: function(e) {
+        e.target.parentNode.remove();
+    }
+
 }

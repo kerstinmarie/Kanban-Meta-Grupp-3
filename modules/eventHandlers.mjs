@@ -9,35 +9,35 @@ Här finns alla funktioner som:
 
 */
 
-
+import { page } from './page.mjs';
 
 export const eventHandlers = {
-    addOnAddCardClickEventHandlers: function () {
-    //    console.log("add card");
+    addOnAddCardBtnClickEventHandlers: function () {
+        console.log("add card");
         const addCardBtns = document.getElementsByClassName("add-card-button");
         Object.keys(addCardBtns).forEach(key => {
             addCardBtns[key].addEventListener("click", e => eventHandlers.onAddCardClickEventHandler(e))
        //     console.log(addCardBtns[key]);
         });
     },
-    onAddCardClickEventHandler: function (e) {
-        const child = document.createElement("div");
-        child.setAttribute("class", "card");
-        child.innerHTML = `
-            <p class="card-description">TOMT NYTT KORT MED SAMMA ATTRIBUT SOM ALLA ANDRA</p>
-            <button class="edit-card-button">Edit</button>
-        `;
-        child.getElementsByClassName("edit-card-button")[0].addEventListener("click", e => eventHandlers.onEditCardClickEventHandler(e));
-        e.target.parentNode.append(child);
-
+    addOnDeleteCardClickEventHandler: function (button) {
+        button.addEventListener("click", e => eventHandlers.onDeleteCardClickEventHandler(e))
     },
-
-    // Jonas Eventhandlers för edit-funktion
+    onAddCardClickEventHandler: function (e) {
+        page.addCard(e);
+    },
+    onDeleteCardClickEventHandler: function (e) {
+        page.deleteCard(e);
+    },
     addEditCardClickEventHandlers: function () {
         const editCardsButtons = document.getElementsByClassName("edit-card-button");
         Object.keys(editCardsButtons).forEach(key => {
             editCardsButtons[key].addEventListener("click", e => eventHandlers.onEditCardClickEventHandler(e))
         });
+    },
+    addEditCardEventHandler: function (button)
+    {
+        button.addEventListener("click", e => eventHandlers.onEditCardClickEventHandler(e));
     },
     onEditCardClickEventHandler: function (e) {
         console.log("Klick");
