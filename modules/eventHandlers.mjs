@@ -9,10 +9,10 @@ Här finns alla funktioner som:
 
 */
 
-import {page} from './page.mjs';
+import { page } from './page.mjs';
 
 export const eventHandlers = {
-    addOnAddCardClickEventHandlers: function () {
+    addOnAddCardBtnClickEventHandlers: function () {
         console.log("add card");
         const addCardBtns = document.getElementsByClassName("add-card-button");
         Object.keys(addCardBtns).forEach(key => {
@@ -20,8 +20,13 @@ export const eventHandlers = {
             console.log(addCardBtns[key]);
         });
     },
+    addOnDeleteCardClickEventHandler: function (button) {
+        button.addEventListener("click", e => eventHandlers.onDeleteCardClickEventHandler(e))
+    },
     onAddCardClickEventHandler: function (e) {
-        page.addCard(e)
-        
+        page.addCard(e);
+    },
+    onDeleteCardClickEventHandler: function (e) {
+        page.deleteCard(e);
     }
 }

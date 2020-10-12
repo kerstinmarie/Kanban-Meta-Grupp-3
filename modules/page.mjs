@@ -1,3 +1,5 @@
+import { eventHandlers } from "./eventHandlers.mjs";
+
 export const page = {
     getFrontPage: function () {
         return `
@@ -119,16 +121,22 @@ export const page = {
 `
     },
     addCard: function (e) {
-        const child = document.createElement("div");
-        child.setAttribute("class", "card");
-        child.innerHTML = `
-            <button class="delete-card-btn">X</button>
-            <p class="card-description">TOMT NYTT KORT MED SAMMA ATTRIBUT SOM ALLA ANDRA</p>
+        const card = document.createElement("div");
+        card.setAttribute("class", "card");
+        const button = document.createElement("button");
+        button.setAttribute("class", "delete-card-btn");
+        button.innerText = "X";
+        eventHandlers.addOnDeleteCardClickEventHandler(button);
+        const par = document.createElement("p");
+        par.setAttribute("class", "card-description");
+        par.innerText = `
+        Nytt kort. ID: ${new Date().getTime()}
         `;
-        e.target.parentNode.append(child);
+        card.append(button, par);
+        e.target.parentNode.append(card);
     },
     deleteCard: function(e) {
-
+        e.target.parentNode.remove();
     }
 
 }
