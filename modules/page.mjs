@@ -118,5 +118,17 @@ export const page = {
     </footer>
 `
     },
-    
+    addCard: function (e) {
+        const child = document.createElement("div");
+        child.setAttribute("class", "card");
+        child.innerHTML = `
+            <button class="delete-card-btn">X</button>
+            <p class="card-description">TOMT NYTT KORT MED SAMMA ATTRIBUT SOM ALLA ANDRA</p>
+        `;
+        e.target.parentNode.append(child);
+    },
+    deleteCard: function(e) {
+
+    }
+
 }

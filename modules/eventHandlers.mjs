@@ -9,7 +9,7 @@ Här finns alla funktioner som:
 
 */
 
-
+import {page} from './page.mjs';
 
 export const eventHandlers = {
     addOnAddCardClickEventHandlers: function () {
@@ -21,11 +21,7 @@ export const eventHandlers = {
         });
     },
     onAddCardClickEventHandler: function (e) {
-        const child = document.createElement("div");
-        child.setAttribute("class", "card");
-        child.innerHTML = `
-            <p class="card-description">TOMT NYTT KORT MED SAMMA ATTRIBUT SOM ALLA ANDRA</p>
-        `;
-        e.target.parentNode.append(child);
+        page.addCard(e)
+        
     }
 }

@@ -188,6 +188,7 @@ button#login-button:hover{
    min-height: 20px;
 }
 .card{
+   position: relative;    /*LA TILL FÖR ATT KUNNA ANVÄNDA POSITION ABSOLUTE PÅ TA-BORT-KNAPP (FÖR ATT KUNNA LÄGGA DEN I HÖRNET LÄNGST UPP I HÖGRA HÖRNET PÅ KORTET*/
    display: inline-block;
    width: 252px;
    min-height: 20px;
@@ -205,6 +206,23 @@ button#login-button:hover{
    margin: 10px 0;
    cursor: pointer;
 }
+
+.delete-card-btn{
+   position: absolute;
+   right: 10px;
+   top: 0;
+   cursor: pointer;
+   border-radius: 100%;
+   width: 5px;
+   height: 5px;
+   color:grey;
+   font-weight: 800;
+   outline: none;
+}
+.delete-card-btn:hover{
+   color: orangered;
+}
+
 /************
 Footer
 ************/
