@@ -100,20 +100,25 @@ export const page = {
     },
     editCard: function(e)
     {
-        e.target.style.display = "none";
-        let parentText = e.target.parentNode.getElementsByClassName("card-description")[0];
-        parentText.contentEditable = true;
-        let btn = document.createElement("button");
-        btn.class = "edit-done-button";
-        btn.innerHTML = "Done";
-        e.target.parentNode.append(btn);
-        parentText.focus();
-        btn.addEventListener("click", function()
+        if(page.cardIsBeingEdited == false)
         {
-            parentText.contentEditable = false;
-            e.target.parentNode.removeChild(btn);
-            e.target.style.display = "block";
-        })
-    }
-
+            e.target.style.display = "none";
+            let parentText = e.target.parentNode.getElementsByClassName("card-description")[0];
+            parentText.contentEditable = true;
+            let btn = document.createElement("button");
+            btn.class = "edit-done-button";
+            btn.innerHTML = "Done";
+            e.target.parentNode.append(btn);
+            parentText.focus();
+            btn.addEventListener("click", function()
+            {
+                parentText.contentEditable = false;
+                e.target.parentNode.removeChild(btn);
+                e.target.style.display = "block";
+                page.cardIsBeingEdited = false;
+            });
+            page.cardIsBeingEdited = true;
+        }
+    },
+    cardIsBeingEdited: new Boolean(false),
 }
