@@ -120,5 +120,5 @@ export const page = {
             page.cardIsBeingEdited = true;
         }
     },
-    cardIsBeingEdited: new Boolean(false),
+    cardIsBeingEdited: new Boolean(false)
 }

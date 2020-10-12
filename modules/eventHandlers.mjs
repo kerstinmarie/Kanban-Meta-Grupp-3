@@ -10,6 +10,7 @@ Här finns alla funktioner som:
 */
 
 import { page } from './page.mjs';
+import { data } from './data.mjs';
 
 export const eventHandlers = {
     addOnAddCardBtnClickEventHandlers: function () {
@@ -41,5 +42,13 @@ export const eventHandlers = {
     },
     onEditCardClickEventHandler: function (e) {
         page.editCard(e);
+    },
+
+    addOnLoginBtnClickEventHandler: function () {
+        const loginBtn = document.getElementById("login-button");
+
+        loginBtn.addEventListener("click", () => {
+            data.loginAuthentication();
+        })
     }
 }
