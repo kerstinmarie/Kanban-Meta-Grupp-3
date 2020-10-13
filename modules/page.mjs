@@ -168,8 +168,8 @@ export const page = {
     renderBoardFromSavedCards: function (board) {
         const boardColumnsElements = document.getElementsByClassName("column");
         console.log("boardColumnsElements", boardColumnsElements)
-        board.forEach(card => {
-            const [cardElement, column, id] = this.createCardFromSaved(card);
+        Object.keys(board).forEach(k=>{
+            const [cardElement, column, id] = this.createCardFromSaved(board[k]);
             this.addCardToBoardFromSaved(cardElement, column, id, boardColumnsElements);
         })
     },

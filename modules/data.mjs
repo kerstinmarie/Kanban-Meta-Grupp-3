@@ -10,8 +10,6 @@ export const data = {
             console.log(error);
         }
     },
-
-
     loginAuthentication: async function () {
         let arrayUserObject = await data.getData('users.json');
         let userNameInput = document.getElementById("username").value;
@@ -36,7 +34,7 @@ export const data = {
         });
     },
     getCardsFromColumns: function (cols) {
-        let boardObject = [];
+        let boardObject = {};
 
         const cardCollections = document.getElementsByClassName("enter-card");
 
@@ -47,7 +45,8 @@ export const data = {
                     let id = 1;
                     Object.keys(cards).forEach(k => {
                         console.log(cards[k].innerText);
-                        boardObject.push({ column: `${col}`, description: `${cards[k].innerText}`, id: `${(new Date().getTime() * id)}` });
+                        boardObject[`${(new Date().getTime() * id)}`] = {column: `${col}`, description: `${cards[k].innerText}`}
+                        // boardObject.push({ column: `${col}`, description: `${cards[k].innerText}`, id: `${(new Date().getTime() * id)}` });
                         id += 1;
                     })
                 }
@@ -58,7 +57,7 @@ export const data = {
     },
     saveCardsToLocalStorage: function (boardObject) {
         const oldStorage = this.getCardsFromLocalStorage();
-        const mergedStorage = {...oldStorage, ...boardObject};
+        let mergedStorage = {...oldStorage, ...boardObject};
         console.log("old storage", oldStorage, "new storage", boardObject, "merged storage", mergedStorage);
         localStorage.setItem("board", JSON.stringify(mergedStorage));
         

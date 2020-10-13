@@ -11,5 +11,4 @@ function script() {
     } else{
         page.loadLoginPage();
     }
-
 }

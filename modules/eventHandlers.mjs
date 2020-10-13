@@ -42,7 +42,6 @@ export const eventHandlers = {
     onEditCardClickEventHandler: function (e) {
         page.editCard(e);
     },
-
     addOnLoginBtnClickEventHandler: function () {
         const loginBtn = document.getElementById("login-button");
 
