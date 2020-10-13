@@ -33,7 +33,7 @@ export const page = {
         <div class="flex-container">
             <div class="empty-keeper"></div>
             <div class="logo-keeper"><h2 class="logotext">Kanban bräda</h2></div>
-            <div class="button-keeper"><button id="logout-button">Logga ut</button></div>
+            <div class="button-keeper"><button class="header-button" id="logout-button">Logga ut</button></div>
         </div>
     </header>
     <main>
@@ -130,6 +130,17 @@ export const page = {
     loadBoardPage: function () {
         document.getElementById("wrapper").innerHTML = page.getBoardPage();
         eventHandlers.addOnAddCardBtnClickEventHandlers(); //Lägger till event handlers på alla "lägg till nytt kort"-knappar
+        page.addSaveBoardButton();
+    },
+    addSaveBoardButton: function() {
+        console.log("ADD SAVE BTN")
+        const button = document.createElement("button");
+        button.innerText = "Spara Bräde";
+        button.setAttribute("id", "save-board-button");
+        button.setAttribute("class", "header-button");
+        button.addEventListener("click", eventHandlers.onSaveBoardButtonClicked);
+        document.getElementsByClassName("button-keeper")[0].append(button);
+        
     },
     cardIsBeingEdited: new Boolean(false)
 }
