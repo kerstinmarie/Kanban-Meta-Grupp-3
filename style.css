@@ -247,6 +247,11 @@ button#login-button:hover{
 
 .add-card-button{
    cursor: pointer;
+   outline: none;
+}
+
+.add-card-button:hover {
+   color: darkblue;
 }
 
 .delete-card-btn{
@@ -260,16 +265,46 @@ button#login-button:hover{
    color:grey;
    font-weight: 800;
    outline: none;
+   opacity: 0.1;
 }
-.delete-card-btn:hover{
-   color: orangered;
+
+.card:hover .delete-card-btn{
+   color: red;
+   opacity: 0.5;
+}
+.card:hover .delete-card-btn:hover{
+   color: red;
+   opacity: 1;
 }
 .edit-card-button, .edit-done-button{
    font-size: 12px;
    font-weight: bold;
    position: absolute;
+   cursor: pointer;
    right: 10px;
    bottom: 5px;
+   opacity: 0;
+   color: darkblue;
+   outline: none;
+   background-color: transparent; 
+}
+
+.edit-done-button{
+   opacity: 0.5;
+}
+
+.card:hover .edit-card-button{
+   opacity: 0.5;
+}
+
+.card:hover .edit-done-button:hover, .card:hover .edit-card-button:hover
+{
+   opacity: 1;
+}
+
+p:focus{
+   color: darkblue;
+   outline: none;
 }
 
 /************
