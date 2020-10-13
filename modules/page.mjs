@@ -95,19 +95,17 @@ export const page = {
 
         const par = document.createElement("p");
         par.setAttribute("class", "card-description");
-        par.innerText = `
-        Nytt kort. ID: ${new Date().getTime()}
-        `;
+        par.innerText = ``;
         card.append(button, par, editButton);
         e.target.parentNode.append(card);
+        editButton.click();
     },
-    deleteCard: function(e) {
+    deleteCard: function (e) {
         e.target.parentNode.remove();
+        page.cardIsBeingEdited = false;
     },
-    editCard: function(e)
-    {
-        if(page.cardIsBeingEdited == false)
-        {
+    editCard: function (e) {
+        if (page.cardIsBeingEdited == false) {
             e.target.style.display = "none";
             let parentText = e.target.parentNode.getElementsByClassName("card-description")[0];
             parentText.contentEditable = true;
@@ -116,8 +114,7 @@ export const page = {
             btn.innerHTML = "Done";
             e.target.parentNode.append(btn);
             parentText.focus();
-            btn.addEventListener("click", function()
-            {
+            btn.addEventListener("click", function () {
                 parentText.contentEditable = false;
                 e.target.parentNode.removeChild(btn);
                 e.target.style.display = "block";
