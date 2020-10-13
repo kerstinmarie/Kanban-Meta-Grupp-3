@@ -123,5 +123,13 @@ export const page = {
             page.cardIsBeingEdited = true;
         }
     },
+    loadLoginPage: function () {
+        document.getElementById("wrapper").innerHTML = page.getFrontPage();
+        eventHandlers.addOnLoginBtnClickEventHandler();
+    },
+    loadBoardPage: function () {
+        document.getElementById("wrapper").innerHTML = page.getBoardPage();
+        eventHandlers.addOnAddCardBtnClickEventHandlers(); //Lägger till event handlers på alla "lägg till nytt kort"-knappar
+    },
     cardIsBeingEdited: new Boolean(false)
 }

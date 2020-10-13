@@ -21,8 +21,7 @@ export const data = {
         let matchedUser = arrayUserObject.some(user => user.username == userNameInput && user.password == passwordInput);
 
         if(matchedUser){
-            document.getElementById("wrapper").innerHTML = page.getBoardPage();
-            eventHandlers.addOnAddCardBtnClickEventHandlers(); //Lägger till event handlers på alla "lägg till nytt kort"-knappar
+            page.loadBoardPage();
         }
 
         // Måste meddela användaren att inloggningen misslyckades.
