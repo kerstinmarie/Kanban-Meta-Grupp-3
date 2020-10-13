@@ -7,7 +7,7 @@ export const page = {
             <div class="flex-container">
                 <div class="empty-keeper"></div>
                 <div class="logo-keeper"><h2 class="logotext">Kanban bräda</h2></div>
-                <div class="button-keeper"><button id="logout-button">Logga ut</button></div>
+                <div class="button-keeper"></div>
             </div>
         </header>
         <main>
