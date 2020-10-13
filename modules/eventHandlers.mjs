@@ -18,7 +18,7 @@ export const eventHandlers = {
         const addCardBtns = document.getElementsByClassName("add-card-button");
         Object.keys(addCardBtns).forEach(key => {
             addCardBtns[key].addEventListener("click", e => eventHandlers.onAddCardClickEventHandler(e))
-       //     console.log(addCardBtns[key]);
+            //     console.log(addCardBtns[key]);
         });
     },
     addOnDeleteCardClickEventHandler: function (button) {
@@ -36,19 +36,22 @@ export const eventHandlers = {
             editCardsButtons[key].addEventListener("click", e => eventHandlers.onEditCardClickEventHandler(e))
         });
     },
-    addEditCardEventHandler: function (button)
-    {
+    addEditCardEventHandler: function (button) {
         button.addEventListener("click", e => eventHandlers.onEditCardClickEventHandler(e));
     },
     onEditCardClickEventHandler: function (e) {
         page.editCard(e);
     },
-
     addOnLoginBtnClickEventHandler: function () {
         const loginBtn = document.getElementById("login-button");
 
         loginBtn.addEventListener("click", () => {
             data.loginAuthentication();
         })
+    },
+    onSaveBoardButtonClicked: function () {
+        const columns = data.getColumnNames();
+        const cards = data.getCardsFromColumns(columns);
+        data.saveCardsToLocalStorage(cards);        
     }
 }

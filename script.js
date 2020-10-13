@@ -11,8 +11,4 @@ function script() {
     } else{
         page.loadLoginPage();
     }
-
-                             //Lägger till event handler till "Logga in"-knappen.
-    //document.getElementById("wrapper").innerHTML = page.getBoardPage();
-    //eventHandlers.addOnAddCardBtnClickEventHandlers();                          //Lägger till event handlers på alla "lägg till nytt kort"-knappar.
 }
