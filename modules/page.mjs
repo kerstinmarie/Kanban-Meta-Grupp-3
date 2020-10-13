@@ -17,6 +17,7 @@ export const page = {
                     <header>
                         <h1>Logga in</h1>
                     </header>
+                        <div id="error-message"></div>
                         <label for="username">Användarnamn: </label>
                         <input id="username" name="username" type="text" placeholder="Användarnamn">
                         <label for="username">Lösenord: </label>
@@ -81,26 +82,27 @@ export const page = {
 `
     },
     addCard: function (e) {
-        const card = document.createElement("div");
-        card.setAttribute("class", "card");
-
-        const button = document.createElement("button");
-        button.setAttribute("class", "delete-card-btn");
-        button.innerText = "X";
-        eventHandlers.addOnDeleteCardClickEventHandler(button);
-
-        const editButton = document.createElement("button");
-        editButton.setAttribute("class", "edit-card-button");
-        editButton.innerText = "Edit";
-        eventHandlers.addEditCardEventHandler(editButton);
-
-        const par = document.createElement("p");
-        par.setAttribute("class", "card-description");
-        par.innerText = `
-        Nytt kort. ID: ${new Date().getTime()}
-        `;
-        card.append(button, par, editButton);
-        e.target.parentNode.append(card);
+        if (page.cardIsBeingEdited == false) {
+            const card = document.createElement("div");
+            card.setAttribute("class", "card");
+    
+            const button = document.createElement("button");
+            button.setAttribute("class", "delete-card-btn");
+            button.innerText = "X";
+            eventHandlers.addOnDeleteCardClickEventHandler(button);
+    
+            const editButton = document.createElement("button");
+            editButton.setAttribute("class", "edit-card-button");
+            editButton.innerText = "Edit";
+            eventHandlers.addEditCardEventHandler(editButton);
+    
+            const par = document.createElement("p");
+            par.setAttribute("class", "card-description");
+            par.innerText = ``;
+            card.append(button, par, editButton);
+            e.target.parentNode.append(card);
+            editButton.click();
+        }
     },
     createCardFromSaved: function (card) {
         const element = document.createElement("div");
@@ -135,6 +137,7 @@ export const page = {
     },
     deleteCard: function (e) {
         e.target.parentNode.remove();
+        page.cardIsBeingEdited = false;
     },
     editCard: function (e) {
         if (page.cardIsBeingEdited == false) {

@@ -14,6 +14,7 @@ export const data = {
         let arrayUserObject = await data.getData('users.json');
         let userNameInput = document.getElementById("username").value;
         let passwordInput = document.getElementById("password").value;
+        let errorMessage = document.getElementById("error-message");
 
         //Kollar ifall det finns en matchande användare
         let matchedUser = arrayUserObject.some(user => user.username == userNameInput && user.password == passwordInput);
@@ -24,6 +25,8 @@ export const data = {
 
         // Måste meddela användaren att inloggningen misslyckades.
         else {
+            errorMessage.innerHTML = " ";
+            errorMessage.insertAdjacentHTML("beforeend", "<p class='error-statement'>Fel användarnamn eller lösenord! Vänligen försök igen.</p>");
             console.log("Fel lösen/användarnamn!");
         }
     },
@@ -45,7 +48,7 @@ export const data = {
                     let id = 1;
                     Object.keys(cards).forEach(k => {
                         console.log(cards[k].innerText);
-                        boardObject[`${(new Date().getTime() * id)}`] = {column: `${col}`, description: `${cards[k].innerText}`}
+                        boardObject[`${(new Date().getTime() * id)}`] = { column: `${col}`, description: `${cards[k].innerText}` }
                         // boardObject.push({ column: `${col}`, description: `${cards[k].innerText}`, id: `${(new Date().getTime() * id)}` });
                         id += 1;
                     })
@@ -57,10 +60,10 @@ export const data = {
     },
     saveCardsToLocalStorage: function (boardObject) {
         const oldStorage = this.getCardsFromLocalStorage();
-        let mergedStorage = {...oldStorage, ...boardObject};
+        let mergedStorage = { ...oldStorage, ...boardObject };
         console.log("old storage", oldStorage, "new storage", boardObject, "merged storage", mergedStorage);
         localStorage.setItem("board", JSON.stringify(mergedStorage));
-        
+
     },
     getCardsFromLocalStorage: function () {
         return JSON.parse(localStorage.getItem("board"));
