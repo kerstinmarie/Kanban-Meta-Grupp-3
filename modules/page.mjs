@@ -101,13 +101,11 @@ export const page = {
         card.append(button, par, editButton);
         e.target.parentNode.append(card);
     },
-    deleteCard: function(e) {
+    deleteCard: function (e) {
         e.target.parentNode.remove();
     },
-    editCard: function(e)
-    {
-        if(page.cardIsBeingEdited == false)
-        {
+    editCard: function (e) {
+        if (page.cardIsBeingEdited == false) {
             e.target.style.display = "none";
             let parentText = e.target.parentNode.getElementsByClassName("card-description")[0];
             parentText.contentEditable = true;
@@ -116,8 +114,7 @@ export const page = {
             btn.innerHTML = "Done";
             e.target.parentNode.append(btn);
             parentText.focus();
-            btn.addEventListener("click", function()
-            {
+            btn.addEventListener("click", function () {
                 parentText.contentEditable = false;
                 e.target.parentNode.removeChild(btn);
                 e.target.style.display = "block";
@@ -125,6 +122,14 @@ export const page = {
             });
             page.cardIsBeingEdited = true;
         }
+    },
+    loadLoginPage: function () {
+        document.getElementById("wrapper").innerHTML = page.getFrontPage();
+        eventHandlers.addOnLoginBtnClickEventHandler();
+    },
+    loadBoardPage: function () {
+        document.getElementById("wrapper").innerHTML = page.getBoardPage();
+        eventHandlers.addOnAddCardBtnClickEventHandlers(); //Lägger till event handlers på alla "lägg till nytt kort"-knappar
     },
     cardIsBeingEdited: new Boolean(false)
 }
