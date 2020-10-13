@@ -52,7 +52,9 @@ export const eventHandlers = {
     },
     onSaveBoardButtonClicked: function () {
         const columns = data.getColumnNames();
-        const boardInfo = data.fetchCardsFromColumns(columns);
+        const boardInfo = data.getCardsFromColumns(columns);
+        
+        console.log(boardInfo);
         
     }
 }

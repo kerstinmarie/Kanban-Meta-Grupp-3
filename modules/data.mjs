@@ -29,10 +29,31 @@ export const data = {
             console.log("Fel lösen/användarnamn!");
         }
     },
-    getColumnNames: function(){
+    getColumnNames: function () {
         const collection = document.getElementsByClassName("column-header");
         return Object.keys(collection).map(k => {
             return collection[k].childNodes[1].innerText;
         });
+    },
+    getCardsFromColumns: function (cols) {
+        let boardObject = [];
+
+        const cardCollections = document.getElementsByClassName("enter-card");
+
+        cols.forEach(col => {
+            Object.keys(cardCollections).forEach(k => {
+                if (cardCollections[k].parentNode.childNodes[1].childNodes[1].innerText === col) {
+                    const cards = cardCollections[k].getElementsByClassName("card-description");
+                    let id = 1;
+                    Object.keys(cards).forEach(k => {
+                        console.log(cards[k].innerText);
+                        boardObject.push({ column: `${col}`, description: `${cards[k].innerText}`, id: `${(new Date().getTime() * id)}` });
+                        id += 1;
+                    })
+                }
+            })
+        })
+        
+        return boardObject;
     }
 }
