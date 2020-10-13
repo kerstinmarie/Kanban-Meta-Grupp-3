@@ -4,8 +4,12 @@ export const page = {
     getFrontPage: function () {
         return `
         <header class="page-header">
-        <div class="logo-keeeper"><h2 class="logotext">Kanban bräda</h2></div>
-   </header>
+            <div class="flex-container">
+                <div class="empty-keeper"></div>
+                <div class="logo-keeper"><h2 class="logotext">Kanban bräda</h2></div>
+                <div class="button-keeper"><button id="logout-button">Logga ut</button></div>
+            </div>
+        </header>
         <main>
             <div class="main">
                 <div class="login-container">
@@ -25,9 +29,11 @@ export const page = {
     },
     getBoardPage: function () {
         return `
-        <header class="page-header">
-        <div class="logo-keeeper">
-            <h2 class="logotext">Kanban bräda</h2>
+    <header class="page-header">
+        <div class="flex-container">
+            <div class="empty-keeper"></div>
+            <div class="logo-keeper"><h2 class="logotext">Kanban bräda</h2></div>
+            <div class="button-keeper"><button id="logout-button">Logga ut</button></div>
         </div>
     </header>
     <main>

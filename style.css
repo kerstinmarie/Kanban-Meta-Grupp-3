@@ -101,22 +101,55 @@ header.page-header{
    background-color:#A4A4AB;
    background-image: linear-gradient(180deg, #01314d, #0079bf);
 }
+.flex-container{
+   display: flex;
+   flex-direction: row;
+}
+.empty-keeper{
+   flex: 33%;
+}
 .logo-keeper{
-   width: 150px;
-   margin: auto;
+   max-width: 100%;
+   padding-left: 150px;
+   margin:  0 auto;
+   flex: 33%;
 }
 h2.logotext {
+   display: inline-block;
+   width: 300px;
    font-family:'Anton', sans-serif;
    text-align: center;
    font-weight: 400;
    font-size: 2.5rem;
    color: #ffffff;
 }
+.button-keeper{
+   flex: 33%;
+ }
+button#logout-button{
+   max-width: 150px;
+   float: right;
+   margin-top: 5px;
+   padding: 8px 10px;
+   border-radius: 20px;
+   color: #0079bf;
+   font-weight: bold;
+   width: 100%;
+   background-image: linear-gradient(#ffffff, #ffffff);
+   font-size: 1rem;
+   cursor: pointer;
+   outline: none;
+}
+button#logout-button:hover,
+button#logout-button:focus{
+   background-image: linear-gradient(180deg, #ffffff, #0079bf);
+   color: #01314d;
+}
 /************
 Main
 ************/
 .main{
-   height: auto;
+   height: 750px;
    padding: 0 6%;
    background-color: #0079bf;
    overflow: hidden;
@@ -124,7 +157,7 @@ Main
 .login-container{
    height: auto;
    width: 30%;
-   margin: 200px auto 375px auto;
+   margin: 150px auto 0 auto;
    padding: 20px 4% 55px 4%;
    border-radius: 7px;
    background-color:#ebecf0;
