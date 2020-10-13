@@ -82,7 +82,7 @@ export const page = {
 `
     },
     addCard: function (e) {
-        if (page.cardIsBeingEdited === false) {
+        if (page.cardIsBeingEdited == false) {
             const card = document.createElement("div");
             card.setAttribute("class", "card");
     
