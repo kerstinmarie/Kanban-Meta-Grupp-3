@@ -101,6 +101,7 @@ header.page-header{
    background-color:#A4A4AB;
    background-image: linear-gradient(180deg, #01314d, #0079bf);
 }
+/*Lagt till flex*/
 .flex-container{
    display: flex;
    flex-direction: row;
