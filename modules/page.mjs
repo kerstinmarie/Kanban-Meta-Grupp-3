@@ -16,6 +16,7 @@ export const page = {
                     <header>
                         <h1>Logga in</h1>
                     </header>
+                        <div id="error-message"></div>
                         <label for="username">Användarnamn: </label>
                         <input id="username" name="username" type="text" placeholder="Användarnamn">
                         <label for="username">Lösenord: </label>
