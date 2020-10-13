@@ -3,7 +3,7 @@ import { data } from './modules/data.mjs';
 import { eventHandlers } from './modules/eventHandlers.mjs';
 document.body.onload = script;
 
-const userIsLoggedIn = true; //false => loginPage  //true => boardPage
+let userIsLoggedIn = localStorage.getItem("currentUser") != null ? true : false;  //false => loginPage  //true => boardPage
 
 function script() {
     if(userIsLoggedIn){

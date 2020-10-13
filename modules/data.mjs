@@ -17,9 +17,10 @@ export const data = {
         let errorMessage = document.getElementById("error-message");
 
         //Kollar ifall det finns en matchande användare
-        let matchedUser = arrayUserObject.some(user => user.username == userNameInput && user.password == passwordInput);
+        let matchedUser = arrayUserObject.some(user => user.username === userNameInput && user.password === passwordInput);
 
-        if (matchedUser) {
+        if(matchedUser){
+            localStorage.setItem("currentUser",userNameInput); //Sparar nuvarande användarnamn
             page.loadBoardPage();
         }
 
