@@ -16,6 +16,7 @@ export const data = {
         let arrayUserObject = await data.getData('users.json');
         let userNameInput = document.getElementById("username").value;
         let passwordInput = document.getElementById("password").value;
+        let errorMessage = document.getElementById("error-message");
 
         //Kollar ifall det finns en matchande användare
         let matchedUser = arrayUserObject.some(user => user.username == userNameInput && user.password == passwordInput);
@@ -26,6 +27,8 @@ export const data = {
 
         // Måste meddela användaren att inloggningen misslyckades.
         else{
+            errorMessage.innerHTML = " ";
+            errorMessage.insertAdjacentHTML("beforeend", "<p class='error-statement'>Fel användarnamn eller lösenord! Vänligen försök igen.</p>");
             console.log("Fel lösen/användarnamn!");
         }
     }
