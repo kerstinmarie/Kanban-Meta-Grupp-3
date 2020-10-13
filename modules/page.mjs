@@ -1,3 +1,4 @@
+import { data } from "./data.mjs";
 import { eventHandlers } from "./eventHandlers.mjs";
 
 export const page = {
@@ -34,7 +35,7 @@ export const page = {
         <div class="flex-container">
             <div class="empty-keeper"></div>
             <div class="logo-keeper"><h2 class="logotext">Kanban bräda</h2></div>
-            <div class="button-keeper"><button id="logout-button">Logga ut</button></div>
+            <div class="button-keeper"><button class="header-button" id="logout-button">Logga ut</button></div>
         </div>
     </header>
     <main>
@@ -103,6 +104,37 @@ export const page = {
             editButton.click();
         }
     },
+    createCardFromSaved: function (card) {
+        const element = document.createElement("div");
+        element.setAttribute("class", "card");
+
+        const button = document.createElement("button");
+        button.setAttribute("class", "delete-card-btn");
+        button.innerText = "X";
+        eventHandlers.addOnDeleteCardClickEventHandler(button);
+
+        const editButton = document.createElement("button");
+        editButton.setAttribute("class", "edit-card-button");
+        editButton.innerText = "Edit";
+        eventHandlers.addEditCardEventHandler(editButton);
+
+        const par = document.createElement("p");
+        par.setAttribute("class", "card-description");
+        par.innerText = `
+        ${card.description}
+        `;
+        element.append(button, par, editButton);
+        return [element, card.column, card.id];
+    },
+    addCardToBoardFromSaved: function (cardElement, column, id, boardColumnElements) {
+        Object.keys(boardColumnElements).forEach(k => {
+            if (column === boardColumnElements[k].children[0].children[0].innerText) {
+                boardColumnElements[k].append(cardElement);
+            }
+
+
+        })
+    },
     deleteCard: function (e) {
         e.target.parentNode.remove();
         page.cardIsBeingEdited = false;
@@ -133,6 +165,26 @@ export const page = {
     loadBoardPage: function () {
         document.getElementById("wrapper").innerHTML = page.getBoardPage();
         eventHandlers.addOnAddCardBtnClickEventHandlers(); //Lägger till event handlers på alla "lägg till nytt kort"-knappar
+        page.addSaveBoardButton();
+        page.renderBoardFromSavedCards(data.getCardsFromLocalStorage());
+    },
+    renderBoardFromSavedCards: function (board) {
+        const boardColumnsElements = document.getElementsByClassName("column");
+        console.log("boardColumnsElements", boardColumnsElements)
+        Object.keys(board).forEach(k=>{
+            const [cardElement, column, id] = this.createCardFromSaved(board[k]);
+            this.addCardToBoardFromSaved(cardElement, column, id, boardColumnsElements);
+        })
+    },
+    addSaveBoardButton: function () {
+        console.log("ADD SAVE BTN")
+        const button = document.createElement("button");
+        button.innerText = "Spara Bräde";
+        button.setAttribute("id", "save-board-button");
+        button.setAttribute("class", "header-button");
+        button.addEventListener("click", eventHandlers.onSaveBoardButtonClicked);
+        document.getElementsByClassName("button-keeper")[0].append(button);
+
     },
     cardIsBeingEdited: new Boolean(false)
 }
