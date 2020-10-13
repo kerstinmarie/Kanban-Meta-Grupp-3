@@ -127,6 +127,7 @@ h2.logotext {
 .button-keeper{
    display: flex;
    flex-direction: row;
+   width: 33%;
  }
  .header-button{
     height: 60px;
