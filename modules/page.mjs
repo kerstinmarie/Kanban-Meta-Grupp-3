@@ -99,7 +99,7 @@ export const page = {
             par.setAttribute("class", "card-description");
             par.innerText = ``;
             card.append(button, par, editButton);
-            e.target.parentNode.append(card);
+            e.target.parentNode.insertBefore(card, e.target.parentNode.childNodes[2]);
             editButton.click();
         }
     },
