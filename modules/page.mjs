@@ -1,3 +1,4 @@
+import { data } from "./data.mjs";
 import { eventHandlers } from "./eventHandlers.mjs";
 
 export const page = {
@@ -101,6 +102,37 @@ export const page = {
         card.append(button, par, editButton);
         e.target.parentNode.append(card);
     },
+    createCardFromSaved: function (card) {
+        const element = document.createElement("div");
+        element.setAttribute("class", "card");
+
+        const button = document.createElement("button");
+        button.setAttribute("class", "delete-card-btn");
+        button.innerText = "X";
+        eventHandlers.addOnDeleteCardClickEventHandler(button);
+
+        const editButton = document.createElement("button");
+        editButton.setAttribute("class", "edit-card-button");
+        editButton.innerText = "Edit";
+        eventHandlers.addEditCardEventHandler(editButton);
+
+        const par = document.createElement("p");
+        par.setAttribute("class", "card-description");
+        par.innerText = `
+        ${card.description}
+        `;
+        element.append(button, par, editButton);
+        return [element, card.column, card.id];
+    },
+    addCardToBoardFromSaved: function (cardElement, column, id, boardColumnElements) {
+        Object.keys(boardColumnElements).forEach(k => {
+            if (column === boardColumnElements[k].children[0].children[0].innerText) {
+                boardColumnElements[k].append(cardElement);
+            }
+
+
+        })
+    },
     deleteCard: function (e) {
         e.target.parentNode.remove();
     },
@@ -131,8 +163,17 @@ export const page = {
         document.getElementById("wrapper").innerHTML = page.getBoardPage();
         eventHandlers.addOnAddCardBtnClickEventHandlers(); //Lägger till event handlers på alla "lägg till nytt kort"-knappar
         page.addSaveBoardButton();
+        page.renderBoardFromSavedCards(data.getCardsFromLocalStorage());
     },
-    addSaveBoardButton: function() {
+    renderBoardFromSavedCards: function (board) {
+        const boardColumnsElements = document.getElementsByClassName("column");
+        console.log("boardColumnsElements", boardColumnsElements)
+        board.forEach(card => {
+            const [cardElement, column, id] = this.createCardFromSaved(card);
+            this.addCardToBoardFromSaved(cardElement, column, id, boardColumnsElements);
+        })
+    },
+    addSaveBoardButton: function () {
         console.log("ADD SAVE BTN")
         const button = document.createElement("button");
         button.innerText = "Spara Bräde";
@@ -140,7 +181,7 @@ export const page = {
         button.setAttribute("class", "header-button");
         button.addEventListener("click", eventHandlers.onSaveBoardButtonClicked);
         document.getElementsByClassName("button-keeper")[0].append(button);
-        
+
     },
     cardIsBeingEdited: new Boolean(false)
 }

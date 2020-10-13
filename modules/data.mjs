@@ -53,7 +53,17 @@ export const data = {
                 }
             })
         })
-        
+
         return boardObject;
+    },
+    saveCardsToLocalStorage: function (boardObject) {
+        const oldStorage = this.getCardsFromLocalStorage();
+        const mergedStorage = {...oldStorage, ...boardObject};
+        console.log("old storage", oldStorage, "new storage", boardObject, "merged storage", mergedStorage);
+        localStorage.setItem("board", JSON.stringify(mergedStorage));
+        
+    },
+    getCardsFromLocalStorage: function () {
+        return JSON.parse(localStorage.getItem("board"));
     }
 }
