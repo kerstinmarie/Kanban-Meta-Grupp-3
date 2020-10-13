@@ -21,6 +21,7 @@ export const data = {
         let matchedUser = arrayUserObject.some(user => user.username == userNameInput && user.password == passwordInput);
 
         if(matchedUser){
+            localStorage.setItem("currentUser",userNameInput); //Sparar nuvarande användarnamn
             page.loadBoardPage();
         }
 
