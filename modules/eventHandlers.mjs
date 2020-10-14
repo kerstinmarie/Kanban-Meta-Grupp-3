@@ -55,5 +55,12 @@ export const eventHandlers = {
         const cards = data.getCardsFromColumns(columns);
         console.log("2", cards);
         data.saveCardsToLocalStorage(cards);        
+    },
+    addOnLogoutBtnClickEventHandlers: function (){
+        const logoutBtn = document.getElementById("logout-button"); 
+        
+        logoutBtn.addEventListener("click", () => {
+            data.logoutUsers();
+      });
     }
 }

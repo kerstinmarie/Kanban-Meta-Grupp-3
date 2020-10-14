@@ -31,6 +31,11 @@ export const data = {
             console.log("Fel lösen/användarnamn!");
         }
     },
+    logoutUsers: function () {
+        localStorage.removeItem("currentUser");
+        console.log(localStorage, "currentUser");
+        page.loadLoginPage();
+    },
     getColumnNames: function () {
         const collection = document.getElementsByClassName("column-header");
         return Object.keys(collection).map(k => {
