@@ -43,7 +43,8 @@ export const page = {
             <div class="column-container">
                 <div id="todo-column" class="column">
                     <header class="column-header">
-                        <h3>Todo</h3>
+                        <h3 class="column-name">Todo</h3>
+                        <button class="edit-column-button">Edit</button>
                     </header>
                     <div class="enter-card">
                         <button class="add-card-button">+ Lägg till ett kort</button>
@@ -51,7 +52,8 @@ export const page = {
                 </div>
                 <div id="doing-column" class="column">
                     <header class="column-header">
-                        <h3>Doing</h3>
+                        <h3 class="column-name">Doing</h3>
+                        <button class="edit-column-button">Edit</button>
                     </header>
                     <div class="enter-card">
                         <button class="add-card-button">+ Lägg till ett kort</button>
@@ -59,7 +61,8 @@ export const page = {
                 </div>
                 <div id="test-column" class="column">
                     <header class="column-header">
-                        <h3>Test</h3>
+                        <h3 class="column-name">Test</h3>
+                        <button class="edit-column-button">Edit</button>
                     </header>
                     <div class="enter-card">
                         <button class="add-card-button">+ Lägg till ett kort</button>
@@ -68,7 +71,8 @@ export const page = {
                 </div>
                 <div id="done-column" class="column">
                     <header class="column-header">
-                        <h3>Done</h3>
+                        <h3 class="column-name">Done</h3>
+                        <button class="edit-column-button">Edit</button>
                     </header>
                     <div class="enter-card">
                         <button class="add-card-button">+ Lägg till ett kort</button>
@@ -82,7 +86,7 @@ export const page = {
 `
     },
     addCard: function (e) {
-        if (page.cardIsBeingEdited == false) {
+        if (page.editing == false) {
             const card = document.createElement("div");
             card.setAttribute("class", "card");
     
@@ -137,25 +141,55 @@ export const page = {
     },
     deleteCard: function (e) {
         e.target.parentNode.remove();
-        page.cardIsBeingEdited = false;
+        page.editing = false;
     },
     editCard: function (e) {
-        if (page.cardIsBeingEdited == false) {
+        if (page.editing == false) {
             e.target.style.display = "none";
             let parentText = e.target.parentNode.getElementsByClassName("card-description")[0];
             parentText.contentEditable = true;
             let btn = document.createElement("button");
             btn.setAttribute("class", "edit-done-button");
-            btn.innerHTML = "Done";
+            btn.innerHTML = "Save";
+            e.target.parentNode.append(btn);
+            parentText.focus();
+            let saved = false;
+            btn.addEventListener("click", function () {
+                saved = true;
+                parentText.contentEditable = false;
+                e.target.parentNode.removeChild(btn);
+                e.target.style.display = "block";
+                page.editing = false;
+            });
+            page.editing = true;
+            window.addEventListener('click', function clickOutsideCardSaveEvent(ev){   
+                if (!e.target.parentNode.contains(ev.target) && saved != true && !e.target.parentNode.parentNode.getElementsByClassName("add-card-button")[0].contains(ev.target)){
+                    parentText.contentEditable = false;
+                    e.target.parentNode.removeChild(btn);
+                    e.target.style.display = "block";
+                    page.editing = false;
+                    window.removeEventListener('click', clickOutsideCardSaveEvent);
+                }
+            });
+        }
+    },
+    editColumnName: function (e) {
+        if (page.editing == false) {
+            e.target.style.display = "none";
+            let parentText = e.target.parentNode.getElementsByClassName("column-name")[0];
+            parentText.contentEditable = true;
+            let btn = document.createElement("button");
+            btn.setAttribute("class", "column-edit-done-button");
+            btn.innerHTML = "Save";
             e.target.parentNode.append(btn);
             parentText.focus();
             btn.addEventListener("click", function () {
                 parentText.contentEditable = false;
                 e.target.parentNode.removeChild(btn);
                 e.target.style.display = "block";
-                page.cardIsBeingEdited = false;
+                page.editing = false;
             });
-            page.cardIsBeingEdited = true;
+            page.editing = true;
         }
     },
     loadLoginPage: function () {
@@ -165,6 +199,7 @@ export const page = {
     loadBoardPage: function () {
         document.getElementById("wrapper").innerHTML = page.getBoardPage();
         eventHandlers.addOnAddCardBtnClickEventHandlers(); //Lägger till event handlers på alla "lägg till nytt kort"-knappar
+        eventHandlers.addEditColumnNameEventHandlers();
         page.addSaveBoardButton();
         page.renderBoardFromSavedCards(data.getCardsFromLocalStorage());
     },
@@ -186,5 +221,5 @@ export const page = {
         document.getElementsByClassName("button-keeper")[0].append(button);
 
     },
-    cardIsBeingEdited: new Boolean(false)
+    editing: new Boolean(false),
 }

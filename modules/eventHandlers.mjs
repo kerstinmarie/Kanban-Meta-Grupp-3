@@ -42,6 +42,15 @@ export const eventHandlers = {
     onEditCardClickEventHandler: function (e) {
         page.editCard(e);
     },
+    addEditColumnNameEventHandlers: function () {
+        const addCardBtns = document.getElementsByClassName("edit-column-button");
+        Object.keys(addCardBtns).forEach(key => {
+            addCardBtns[key].addEventListener("click", e => eventHandlers.onEditColumnNameEventHandler(e))
+        });
+    },
+    onEditColumnNameEventHandler: function (e) {
+        page.editColumnName(e);
+    },
     addOnLoginBtnClickEventHandler: function () {
         const loginBtn = document.getElementById("login-button");
 
