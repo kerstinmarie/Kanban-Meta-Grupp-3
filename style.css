@@ -221,6 +221,7 @@ button#login-button:hover{
    margin: 0;
 }
 .column{
+   position: relative; /*LA TILL FÖR ATT KUNNA ANVÄNDA POSITION ABSOLUTE PÅ EDIT-COLUMN-BUTTON (FÖR ATT KUNNA LÄGGA DEN I HÖRNET LÄNGST UPP I HÖGRA HÖRNET PÅ KOLUMNEN*/
    float: left;
    background-color:#ebecf0;
    width: 272px;
@@ -240,6 +241,39 @@ button#login-button:hover{
    min-height: 20px;
 }
 
+.column-name{
+   outline: none;
+}
+
+.edit-column-button, .column-edit-done-button{
+   position: absolute;
+   right: 25px;
+   top: 5px;
+   cursor: pointer;
+   border-radius: 100%;
+   width: 5px;
+   font-weight: bold;
+   height: 5px;
+   color:grey;
+   outline: none;
+   opacity: 0.1;
+}
+
+.column-edit-done-button{
+   color: darkblue;
+   opacity: 0.5;
+   margin-right: 5px;
+
+}
+
+.column:hover .edit-column-button{
+   color: darkblue;
+   opacity: 0.5;
+}
+
+.column:hover .edit-column-button:hover, .column:hover .column-edit-done-button:hover{
+   opacity: 1;
+}
 /* ----------------------------------------------------------------------CARDS */
 
 
@@ -255,6 +289,7 @@ button#login-button:hover{
    border-bottom: 1px solid #A4A4AB;
    border-right: 1px solid #A4A4AB;
    cursor: pointer;
+   overflow-wrap: break-word;
 }
 .enter-card{
    width: 252px;
