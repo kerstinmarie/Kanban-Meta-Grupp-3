@@ -60,7 +60,7 @@ export const data = {
         return boardObject;
     },
     createCardObjectFromHTMLElement: function (element) {
-        const description = element.children[1].innerText;
+        const description = element.children[1].innerText.slice(1,-1);
         const id = new Date().getTime();
         const column = element.parentNode.children[0].innerText;
         return {column: column, description: description, id: id};
