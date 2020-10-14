@@ -19,8 +19,8 @@ export const data = {
         //Kollar ifall det finns en matchande användare
         let matchedUser = arrayUserObject.some(user => user.username === userNameInput && user.password === passwordInput);
 
-        if(matchedUser){
-            localStorage.setItem("currentUser",userNameInput); //Sparar nuvarande användarnamn
+        if (matchedUser) {
+            localStorage.setItem("currentUser", userNameInput); //Sparar nuvarande användarnamn
             page.loadBoardPage();
         }
 
@@ -56,8 +56,15 @@ export const data = {
                 }
             })
         })
-
+        console.log("board object fetched from board to save", boardObject);
         return boardObject;
+    },
+    createCardObjectFromHTMLElement: function (element) {
+        const description = element.children[1].innerText;
+        const id = new Date().getTime();
+        const column = element.parentNode.children[0].innerText;
+        return {column: column, description: description, id: id};
+
     },
     saveCardsToLocalStorage: function (boardObject) {
         const oldStorage = this.getCardsFromLocalStorage();
@@ -65,6 +72,9 @@ export const data = {
         console.log("old storage", oldStorage, "new storage", boardObject, "merged storage", mergedStorage);
         localStorage.setItem("board", JSON.stringify(mergedStorage));
 
+    },
+    saveCardToLocalStorage: function (e) {
+        console.log(this.createCardObjectFromHTMLElement(e.target.parentNode));
     },
     getCardsFromLocalStorage: function () {
         return JSON.parse(localStorage.getItem("board"));

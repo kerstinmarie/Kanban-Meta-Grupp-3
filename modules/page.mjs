@@ -154,6 +154,7 @@ export const page = {
                 e.target.parentNode.removeChild(btn);
                 e.target.style.display = "block";
                 page.cardIsBeingEdited = false;
+                data.saveCardToLocalStorage(e);
             });
             page.cardIsBeingEdited = true;
         }
@@ -165,7 +166,6 @@ export const page = {
     loadBoardPage: function () {
         document.getElementById("wrapper").innerHTML = page.getBoardPage();
         eventHandlers.addOnAddCardBtnClickEventHandlers(); //Lägger till event handlers på alla "lägg till nytt kort"-knappar
-        page.addSaveBoardButton();
         page.renderBoardFromSavedCards(data.getCardsFromLocalStorage());
     },
     renderBoardFromSavedCards: function (board) {
@@ -177,16 +177,6 @@ export const page = {
                 this.addCardToBoardFromSaved(cardElement, column, id, boardColumnsElements);
             })
         }
-    },
-    addSaveBoardButton: function () {
-        console.log("ADD SAVE BTN")
-        const button = document.createElement("button");
-        button.innerText = "Spara Bräde";
-        button.setAttribute("id", "save-board-button");
-        button.setAttribute("class", "header-button");
-        button.addEventListener("click", eventHandlers.onSaveBoardButtonClicked);
-        document.getElementsByClassName("button-keeper")[0].append(button);
-
     },
     cardIsBeingEdited: new Boolean(false)
 }
