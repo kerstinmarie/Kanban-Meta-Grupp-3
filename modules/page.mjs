@@ -85,17 +85,17 @@ export const page = {
         if (page.cardIsBeingEdited == false) {
             const card = document.createElement("div");
             card.setAttribute("class", "card");
-    
+
             const button = document.createElement("button");
             button.setAttribute("class", "delete-card-btn");
             button.innerText = "X";
             eventHandlers.addOnDeleteCardClickEventHandler(button);
-    
+
             const editButton = document.createElement("button");
             editButton.setAttribute("class", "edit-card-button");
             editButton.innerText = "Edit";
             eventHandlers.addEditCardEventHandler(editButton);
-    
+
             const par = document.createElement("p");
             par.setAttribute("class", "card-description");
             par.innerText = ``;
@@ -171,10 +171,12 @@ export const page = {
     renderBoardFromSavedCards: function (board) {
         const boardColumnsElements = document.getElementsByClassName("column");
         console.log("boardColumnsElements", boardColumnsElements)
-        Object.keys(board).forEach(k=>{
-            const [cardElement, column, id] = this.createCardFromSaved(board[k]);
-            this.addCardToBoardFromSaved(cardElement, column, id, boardColumnsElements);
-        })
+        if (board) {
+            Object.keys(board).forEach(k => {
+                const [cardElement, column, id] = this.createCardFromSaved(board[k]);
+                this.addCardToBoardFromSaved(cardElement, column, id, boardColumnsElements);
+            })
+        }
     },
     addSaveBoardButton: function () {
         console.log("ADD SAVE BTN")

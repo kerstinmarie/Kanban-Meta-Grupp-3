@@ -51,7 +51,9 @@ export const eventHandlers = {
     },
     onSaveBoardButtonClicked: function () {
         const columns = data.getColumnNames();
+        console.log("1",columns);
         const cards = data.getCardsFromColumns(columns);
+        console.log("2", cards);
         data.saveCardsToLocalStorage(cards);        
     }
 }
