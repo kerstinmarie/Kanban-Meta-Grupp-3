@@ -82,6 +82,7 @@ export const page = {
 `
     },
     addCard: function (e) {
+        page.creatingNewCard = true;
         if (page.cardIsBeingEdited == false) {
             const card = document.createElement("div");
             card.setAttribute("class", "card");
@@ -154,7 +155,11 @@ export const page = {
                 e.target.parentNode.removeChild(btn);
                 e.target.style.display = "block";
                 page.cardIsBeingEdited = false;
-                data.saveCardToLocalStorage(e);
+                if (!page.creatingNewCard) {
+                    data.saveCardToLocalStorage(e.target.parentNode);
+                } else {
+                    data.saveCardToLocalStorage(e.target.parentNode.parentNode);
+                }
             });
             page.cardIsBeingEdited = true;
         }
@@ -178,5 +183,6 @@ export const page = {
             })
         }
     },
-    cardIsBeingEdited: new Boolean(false)
+    cardIsBeingEdited: new Boolean(false),
+    creatingNewCard: false
 }
