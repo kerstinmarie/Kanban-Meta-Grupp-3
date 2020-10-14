@@ -167,6 +167,7 @@ export const page = {
         eventHandlers.addOnAddCardBtnClickEventHandlers(); //Lägger till event handlers på alla "lägg till nytt kort"-knappar
         page.addSaveBoardButton();
         page.renderBoardFromSavedCards(data.getCardsFromLocalStorage());
+        eventHandlers.addOnLogoutBtnClickEventHandlers();
     },
     renderBoardFromSavedCards: function (board) {
         const boardColumnsElements = document.getElementsByClassName("column");
