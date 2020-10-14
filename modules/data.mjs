@@ -65,21 +65,6 @@ export const data = {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ////Gammal implementering av sparning av board
 
 
