@@ -43,20 +43,25 @@ export const data = {
         });
     },
     createCardObjectFromHTMLElement: function (element) {
-        console.log("parentnode",element.parentNode);
-        console.log("element",element);
+        console.log("parentnode", element.parentNode);
+        console.log("element", element);
         const description = element.children[1].innerText;
-        const id = new Date().getTime();
-        const column = element.parentNode.parentNode.getElementsByClassName("column-header")[0].innerText;
+        let id = element.getAttribute("card-id");
+        let column = "";
+        if (page.creatingNewCard) {             //event.target har olika plats om det är nytt kort eller redigerar gammalt
+            column = element.parentNode.parentNode.getElementsByClassName("column-header")[0].innerText;    
+        } else {
+            column = element.parentNode.getElementsByClassName("column-header")[0].innerText;
+        }
         console.log("desc:", description, "id", id, "col", column);
         return [id, { column: column, description: description }];
 
     },
-    saveCardToLocalStorage: function (e) {
-        console.log("save card", e);
-        const [id, newCard] = this.createCardObjectFromHTMLElement(e);
+    saveCardToLocalStorage: function (card) {
+        console.log("save card", card);
+        const [id, newCard] = this.createCardObjectFromHTMLElement(card);
         let storageToUpdate = this.getCardsFromLocalStorage();
-        if(storageToUpdate === null){
+        if (storageToUpdate === null) {
             storageToUpdate = {};
         }
         storageToUpdate[id] = newCard;

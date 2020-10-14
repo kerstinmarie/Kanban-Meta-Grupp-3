@@ -87,6 +87,8 @@ export const page = {
             const card = document.createElement("div");
             card.setAttribute("class", "card");
 
+            card.setAttribute("card-id", `${new Date().getTime()}`) //kortet får ett unikt attribut så att vi inte skapar dubbletter.
+
             const button = document.createElement("button");
             button.setAttribute("class", "delete-card-btn");
             button.innerText = "X";
@@ -155,11 +157,7 @@ export const page = {
                 e.target.parentNode.removeChild(btn);
                 e.target.style.display = "block";
                 page.cardIsBeingEdited = false;
-                if (!page.creatingNewCard) {
-                    data.saveCardToLocalStorage(e.target.parentNode);
-                } else {
-                    data.saveCardToLocalStorage(e.target.parentNode);
-                }
+                data.saveCardToLocalStorage(e.target.parentNode);
             });
             page.cardIsBeingEdited = true;
         }
