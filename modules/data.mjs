@@ -44,9 +44,10 @@ export const data = {
     },
     createCardObjectFromHTMLElement: function (element) {
         console.log("parentnode",element.parentNode);
+        console.log("element",element);
         const description = element.children[1].innerText;
         const id = new Date().getTime();
-        const column = element.parentNode.getElementsByClassName("column-header")[0].innerText;
+        const column = element.parentNode.parentNode.getElementsByClassName("column-header")[0].innerText;
         console.log("desc:", description, "id", id, "col", column);
         return [id, { column: column, description: description }];
 

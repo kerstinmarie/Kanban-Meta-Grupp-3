@@ -158,7 +158,7 @@ export const page = {
                 if (!page.creatingNewCard) {
                     data.saveCardToLocalStorage(e.target.parentNode);
                 } else {
-                    data.saveCardToLocalStorage(e.target.parentNode.parentNode);
+                    data.saveCardToLocalStorage(e.target.parentNode);
                 }
             });
             page.cardIsBeingEdited = true;
