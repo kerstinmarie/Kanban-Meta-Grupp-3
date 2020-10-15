@@ -53,7 +53,7 @@ export const data = {
             column = element.parentNode.parentNode.getElementsByClassName("column-name")[0].innerText;
             page.creatingNewCard = false;
         } else {
-            column = element.parentNode.parentNode.getElementsByClassName("column-name")[0].innerText;
+            column = element.parentNode.getElementsByClassName("column-name")[0].innerText;
         }
         console.log("desc:", description, "id", id, "col", column);
         return [id, { column: column, description: description, id: id }];
@@ -139,6 +139,22 @@ export const data = {
 
     },
     getCardsOrderFromLocalStorage: function () {
+        /*returnerar ett objekt med föjande format 
+        obj = {
+            kolumnNamn1:{
+                ordningsnumer1:{
+                    cardId: kortid
+                },
+                ordningsnummer2:{
+                    cardId: kortid
+                }
+            },
+            kolumnnamn2:{
+                ordningsnummer1:{
+                    cardid:kortid......
+                }....
+            }....
+            }*/
         return JSON.parse(localStorage.getItem("cardOrder"));
     },
     saveCardsOrderToLocalStorage: function () {
