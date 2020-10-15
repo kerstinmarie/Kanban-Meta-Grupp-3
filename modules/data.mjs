@@ -139,7 +139,7 @@ export const data = {
 
     },
     saveCardsOrderToLocalStorage: function () {
-        /*stringifyar och sparar getCardsOrder-objektet i localstorage*/
+        /*hämtar, stringifyar och sparar getCardsOrder-objektet i localstorage*/
         console.log("saving cards order");
         const cardsOrderObject = this.getCardsOrder();
         localStorage.setItem("cardOrder", JSON.stringify(cardsOrderObject));
