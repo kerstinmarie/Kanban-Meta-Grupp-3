@@ -41,7 +41,7 @@ export const page = {
     <main>
         <div class="main">
             <div class="column-container">
-                <div id="todo-column" class="column">
+                <div id="todo-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <header class="column-header">
                         <h3 class="column-name">Todo</h3>
                         <button class="edit-column-button">Edit</button>
@@ -50,7 +50,7 @@ export const page = {
                         <button class="add-card-button">+ Lägg till ett kort</button>
                     </div>
                 </div>
-                <div id="doing-column" class="column">
+                <div id="doing-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <header class="column-header">
                         <h3 class="column-name">Doing</h3>
                         <button class="edit-column-button">Edit</button>
@@ -59,7 +59,7 @@ export const page = {
                         <button class="add-card-button">+ Lägg till ett kort</button>
                     </div>
                 </div>
-                <div id="test-column" class="column">
+                <div id="test-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <header class="column-header">
                         <h3 class="column-name">Test</h3>
                         <button class="edit-column-button">Edit</button>
@@ -69,7 +69,7 @@ export const page = {
                     </div>
                    
                 </div>
-                <div id="done-column" class="column">
+                <div id="done-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <header class="column-header">
                         <h3 class="column-name">Done</h3>
                         <button class="edit-column-button">Edit</button>
@@ -93,6 +93,10 @@ export const page = {
             card.setAttribute("class", "card");
 
             card.setAttribute("card-id", `${new Date().getTime()}`) //kortet får ett unikt attribut så att vi inte skapar dubbletter.
+            card.setAttribute("draggable","true");
+            card.setAttribute("ondragstart","drag(event)");
+            card.setAttribute("id",this.cardNr += 1);
+            card.setAttribute("ondragover","noAllowDrop(event)");
 
             const button = document.createElement("button");
             button.setAttribute("class", "delete-card-btn");
@@ -105,7 +109,8 @@ export const page = {
             eventHandlers.addEditCardEventHandler(editButton);
 
             const par = document.createElement("p");
-            par.setAttribute("class", "card-description");
+            par.setAttribute("class", "card-description noDrop");
+            par.setAttribute("ondragover","noAllowDrop(event)");
             par.innerText = ``;
             card.append(button, par, editButton);
             e.target.parentNode.insertBefore(card, e.target.parentNode.childNodes[2]);
@@ -117,6 +122,10 @@ export const page = {
         element.setAttribute("class", "card");
 
         element.setAttribute("card-id", `${card.id}`);
+        element.setAttribute("draggable","true");
+        element.setAttribute("ondragstart","drag(event)");
+        element.setAttribute("id",this.cardNr += 1);
+        card.setAttribute("ondragover","noAllowDrop(event)");
 
         const button = document.createElement("button");
         button.setAttribute("class", "delete-card-btn");
@@ -130,6 +139,7 @@ export const page = {
 
         const par = document.createElement("p");
         par.setAttribute("class", "card-description");
+        par.setAttribute("ondragover","noAllowDrop(event)");
         par.innerText = `
         ${card.description}
         `;
@@ -222,5 +232,6 @@ export const page = {
     },
     creatingNewCard: false,
     editing: new Boolean(false),
+    cardNr: 0
 
 }
