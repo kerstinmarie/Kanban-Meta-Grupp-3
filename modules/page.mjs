@@ -125,7 +125,7 @@ export const page = {
         element.setAttribute("draggable","true");
         element.setAttribute("ondragstart","drag(event)");
         element.setAttribute("id",this.cardNr += 1);
-        card.setAttribute("ondragover","noAllowDrop(event)");
+        element.setAttribute("ondragover","noAllowDrop(event)");
 
         const button = document.createElement("button");
         button.setAttribute("class", "delete-card-btn");
