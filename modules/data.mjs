@@ -91,7 +91,7 @@ export const data = {
         console.log("updated Storage", updatedStorage);
         localStorage.setItem("board", JSON.stringify(updatedStorage));
     },
-    getCardsOrder: function () {
+    getCardsOrderFromDOM: function () {
         /*tar inga argument, returnerar ett objekt med föjande format 
         obj = {
             kolumnNamn1:{
@@ -138,10 +138,13 @@ export const data = {
         return cardOrderObject;
 
     },
+    getCardsOrderFromLocalStorage: function () {
+        return JSON.parse(localStorage.getItem("cardOrder"));
+    },
     saveCardsOrderToLocalStorage: function () {
         /*hämtar, stringifyar och sparar getCardsOrder-objektet i localstorage*/
         console.log("saving cards order");
-        const cardsOrderObject = this.getCardsOrder();
+        const cardsOrderObject = this.getCardsOrderFromDOM();
         localStorage.setItem("cardOrder", JSON.stringify(cardsOrderObject));
     }
 }
