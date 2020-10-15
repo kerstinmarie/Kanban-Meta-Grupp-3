@@ -151,7 +151,7 @@ export const page = {
     addCardToBoardFromSaved: function (cardElement, column, id, boardColumnElements) {
         Object.keys(boardColumnElements).forEach(k => {
             if (column === boardColumnElements[k].children[0].children[0].innerText) {
-                boardColumnElements[k].append(cardElement);
+                boardColumnElements[k].getElementsByClassName("enter-card")[0].append(cardElement);
             }
 
 
