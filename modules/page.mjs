@@ -12,7 +12,7 @@ export const page = {
             </div>
         </header>
         <main>
-            <div class="main">
+            <div class="main start">
                 <div class="login-container">
                     <header>
                         <h1>Logga in</h1>
@@ -40,42 +40,44 @@ export const page = {
     </header>
     <main>
         <div class="main">
-            <div class="column-container">
-                <div id="todo-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <header class="column-header">
-                        <h3 class="column-name">Todo</h3>
-                        <button class="edit-column-button">Edit</button>
-                    </header>
-                    <div class="enter-card">
-                        <button class="add-card-button">+ Lägg till ett kort</button>
+            <div class="scrollbar">
+                <div class="column-container">
+                    <div id="todo-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <header class="column-header">
+                            <h3 class="column-name">Todo</h3>
+                            <button class="edit-column-button">Edit</button>
+                        </header>
+                        <div class="enter-card">
+                            <button class="add-card-button">+ Lägg till ett kort</button>
+                        </div>
                     </div>
-                </div>
-                <div id="doing-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <header class="column-header">
-                        <h3 class="column-name">Doing</h3>
-                        <button class="edit-column-button">Edit</button>
-                    </header>
-                    <div class="enter-card">
-                        <button class="add-card-button">+ Lägg till ett kort</button>
+                    <div id="doing-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <header class="column-header">
+                            <h3 class="column-name">Doing</h3>
+                            <button class="edit-column-button">Edit</button>
+                        </header>
+                        <div class="enter-card">
+                            <button class="add-card-button">+ Lägg till ett kort</button>
+                        </div>
                     </div>
-                </div>
-                <div id="test-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <header class="column-header">
-                        <h3 class="column-name">Test</h3>
-                        <button class="edit-column-button">Edit</button>
-                    </header>
-                    <div class="enter-card">
-                        <button class="add-card-button">+ Lägg till ett kort</button>
+                    <div id="test-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <header class="column-header">
+                            <h3 class="column-name">Test</h3>
+                            <button class="edit-column-button">Edit</button>
+                        </header>
+                        <div class="enter-card">
+                            <button class="add-card-button">+ Lägg till ett kort</button>
+                        </div>
+                    
                     </div>
-                   
-                </div>
-                <div id="done-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <header class="column-header">
-                        <h3 class="column-name">Done</h3>
-                        <button class="edit-column-button">Edit</button>
-                    </header>
-                    <div class="enter-card">
-                        <button class="add-card-button">+ Lägg till ett kort</button>
+                    <div id="done-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <header class="column-header">
+                            <h3 class="column-name">Done</h3>
+                            <button class="edit-column-button">Edit</button>
+                        </header>
+                        <div class="enter-card">
+                            <button class="add-card-button">+ Lägg till ett kort</button>
+                        </div>
                     </div>
                 </div>
             </div>
