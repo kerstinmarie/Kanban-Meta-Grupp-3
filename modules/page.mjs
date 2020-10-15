@@ -156,6 +156,10 @@ export const page = {
         })
     },
     deleteCard: function (e) {
+        if(page.editing){
+            let editOverlay = document.getElementById("editOverlay");        
+            editOverlay.remove();
+        }
         e.target.parentNode.remove();
         page.editing = false;
     },
