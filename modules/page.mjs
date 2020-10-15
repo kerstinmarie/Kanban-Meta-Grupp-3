@@ -93,10 +93,10 @@ export const page = {
             card.setAttribute("class", "card");
 
             card.setAttribute("card-id", `${new Date().getTime()}`) //kortet får ett unikt attribut så att vi inte skapar dubbletter.
-            card.setAttribute("draggable","true");
-            card.setAttribute("ondragstart","drag(event)");
-            card.setAttribute("id",this.cardNr += 1);
-            card.setAttribute("ondragover","noAllowDrop(event)");
+            card.setAttribute("draggable", "true");
+            card.setAttribute("ondragstart", "drag(event)");
+            card.setAttribute("id", this.cardNr += 1);
+            card.setAttribute("ondragover", "noAllowDrop(event)");
 
             const button = document.createElement("button");
             button.setAttribute("class", "delete-card-btn");
@@ -110,7 +110,7 @@ export const page = {
 
             const par = document.createElement("p");
             par.setAttribute("class", "card-description noDrop");
-            par.setAttribute("ondragover","noAllowDrop(event)");
+            par.setAttribute("ondragover", "noAllowDrop(event)");
             par.innerText = ``;
             card.append(button, par, editButton);
             e.target.parentNode.insertBefore(card, e.target.parentNode.childNodes[2]);
@@ -122,10 +122,10 @@ export const page = {
         element.setAttribute("class", "card");
 
         element.setAttribute("card-id", `${card.id}`);
-        element.setAttribute("draggable","true");
-        element.setAttribute("ondragstart","drag(event)");
-        element.setAttribute("id",this.cardNr += 1);
-        element.setAttribute("ondragover","noAllowDrop(event)");
+        element.setAttribute("draggable", "true");
+        element.setAttribute("ondragstart", "drag(event)");
+        element.setAttribute("id", this.cardNr += 1);
+        element.setAttribute("ondragover", "noAllowDrop(event)");
 
         const button = document.createElement("button");
         button.setAttribute("class", "delete-card-btn");
@@ -139,7 +139,7 @@ export const page = {
 
         const par = document.createElement("p");
         par.setAttribute("class", "card-description");
-        par.setAttribute("ondragover","noAllowDrop(event)");
+        par.setAttribute("ondragover", "noAllowDrop(event)");
         par.innerText = `
         ${card.description}
         `;
@@ -176,11 +176,12 @@ export const page = {
                 e.target.parentNode.removeChild(btn);
                 e.target.style.display = "block";
                 data.saveCardToLocalStorage(e.target.parentNode);
+                data.saveCardsOrderToLocalStorage();
                 page.editing = false;
             });
             page.editing = true;
-            window.addEventListener('click', function clickOutsideCardSaveEvent(ev){   
-                if (!e.target.parentNode.contains(ev.target) && saved != true && !e.target.parentNode.parentNode.getElementsByClassName("add-card-button")[0].contains(ev.target)){
+            window.addEventListener('click', function clickOutsideCardSaveEvent(ev) {
+                if (!e.target.parentNode.contains(ev.target) && saved != true && !e.target.parentNode.parentNode.getElementsByClassName("add-card-button")[0].contains(ev.target)) {
                     parentText.contentEditable = false;
                     e.target.parentNode.removeChild(btn);
                     e.target.style.display = "block";
@@ -219,6 +220,12 @@ export const page = {
         eventHandlers.addEditColumnNameEventHandlers();
         page.renderBoardFromSavedCards(data.getCardsFromLocalStorage());
         eventHandlers.addOnLogoutBtnClickEventHandlers();
+
+
+
+        ////provisorisk kod för card order save
+
+        console.log("get cards order", data.getCardsOrder());
     },
     renderBoardFromSavedCards: function (board) {
         const boardColumnsElements = document.getElementsByClassName("column");

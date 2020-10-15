@@ -81,8 +81,8 @@ export const data = {
         const updatedStorage = (() => {
             let newStorageObj = {};
             Object.keys(storageToUpdate).forEach(k => {
-                if (k !== id){
-                    newStorageObj[k] = {description: storageToUpdate[k].description, id: k, column: storageToUpdate[k].column}
+                if (k !== id) {
+                    newStorageObj[k] = { description: storageToUpdate[k].description, id: k, column: storageToUpdate[k].column }
                 }
                 console.log("id", k);
             })
@@ -90,6 +90,59 @@ export const data = {
         })();
         console.log("updated Storage", updatedStorage);
         localStorage.setItem("board", JSON.stringify(updatedStorage));
+    },
+    getCardsOrder: function () {
+        /*tar inga argument, returnerar ett objekt med föjande format 
+        obj = {
+            kolumnNamn1:{
+                ordningsnumer1:{
+                    cardId: kortid
+                },
+                ordningsnummer2:{
+                    cardId: kortid
+                }
+            },
+            kolumnnamn2:{
+                ordningsnummer1:{
+                    cardid:kortid......
+                }....
+            }....
+            }*/
+
+        const colNames = this.getColumnNames();
+        const columnElements = document.getElementsByClassName("column");
+        let cardOrderObject = {};
+        colNames.forEach(colName => {
+            Object.keys(columnElements).forEach(k => {
+                const colElName = columnElements[k].getElementsByClassName("column-name")[0].innerText;
+                if (colElName === colName) {
+                    console.log("col el name", colElName, "colname", colName);
+                    const cards = columnElements[k].getElementsByClassName("card");
+                    let order = 0;
+                    Object.keys(cards).forEach(k => {
+
+                        const cardId = cards[k].getAttribute("card-id");
+
+                        if (cardOrderObject[colName] === undefined) {
+                            cardOrderObject[colName] = {};
+                        }
+                        cardOrderObject[colName][order] = { cardId: cardId }
+
+                        order++;
+                    })
+
+                }
+
+            })
+        })
+        return cardOrderObject;
+
+    },
+    saveCardsOrderToLocalStorage: function () {
+        /*stringifyar och sparar getCardsOrder-objektet i localstorage*/
+        console.log("saving cards order");
+        const cardsOrderObject = this.getCardsOrder();
+        localStorage.setItem("cardOrder", JSON.stringify(cardsOrderObject));
     }
 }
 
