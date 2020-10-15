@@ -51,7 +51,7 @@ export const data = {
         let column = "";
         if (page.creatingNewCard) {             //event.target har olika plats om det är nytt kort eller redigerar gammalt
             column = element.parentNode.parentNode.getElementsByClassName("column-name")[0].innerText;
-            page.creatingNewCard = false; 
+            page.creatingNewCard = false;
         } else {
             column = element.parentNode.getElementsByClassName("column-name")[0].innerText;
         }
@@ -73,42 +73,24 @@ export const data = {
     },
     getCardsFromLocalStorage: function () {
         return JSON.parse(localStorage.getItem("board"));
+    },
+    deleteCardFromLocalStorage: function (e) {
+        const id = e.target.parentNode.getAttribute("card-id");
+        console.log("tar bort id:", e.target.parentNode.getAttribute("card-id"));
+        let storageToUpdate = this.getCardsFromLocalStorage();
+        const updatedStorage = (() => {
+            let newStorageObj = {};
+            Object.keys(storageToUpdate).forEach(k => {
+                if (k !== id){
+                    newStorageObj[k] = {description: storageToUpdate[k].description, id: k, column: storageToUpdate[k].column}
+                }
+                console.log("id", k);
+            })
+            return newStorageObj;
+        })();
+        console.log("updated Storage", updatedStorage);
+        localStorage.setItem("board", JSON.stringify(updatedStorage));
     }
 }
 
 
-
-
-////Gammal implementering av sparning av board
-
-
-    // saveCardsToLocalStorage: function (boardObject) {
-    //     const oldStorage = this.getCardsFromLocalStorage();
-    //     let mergedStorage = { ...oldStorage, ...boardObject };
-    //     console.log("old storage", oldStorage, "new storage", boardObject, "merged storage", mergedStorage);
-    //     localStorage.setItem("board", JSON.stringify(mergedStorage));
-
-    // },
-
-        // getCardsFromColumns: function (cols) {
-    //     let boardObject = {};
-
-    //     const cardCollections = document.getElementsByClassName("enter-card");
-
-    //     cols.forEach(col => {
-    //         Object.keys(cardCollections).forEach(k => {
-    //             if (cardCollections[k].parentNode.childNodes[1].childNodes[1].innerText === col) {
-    //                 const cards = cardCollections[k].getElementsByClassName("card-description");
-    //                 let id = 1;
-    //                 Object.keys(cards).forEach(k => {
-    //                     console.log(cards[k].innerText);
-    //                     boardObject[`${(new Date().getTime() * id)}`] = { column: `${col}`, description: `${cards[k].innerText}` }
-    //                     // boardObject.push({ column: `${col}`, description: `${cards[k].innerText}`, id: `${(new Date().getTime() * id)}` });
-    //                     id += 1;
-    //                 })
-    //             }
-    //         })
-    //     })
-    //     console.log("board object fetched from board to save", boardObject);
-    //     return boardObject;
-    // },

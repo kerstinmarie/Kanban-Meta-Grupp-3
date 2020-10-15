@@ -29,6 +29,7 @@ export const eventHandlers = {
     },
     onDeleteCardClickEventHandler: function (e) {
         page.deleteCard(e);
+        data.deleteCardFromLocalStorage(e);
     },
     addEditCardClickEventHandlers: function () {
         const editCardsButtons = document.getElementsByClassName("edit-card-button");
