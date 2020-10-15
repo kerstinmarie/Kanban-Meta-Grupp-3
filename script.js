@@ -24,6 +24,7 @@ window.noAllowDrop = function(e) {
     e.stopPropagation();
 }
 
+
 function script() {
     if(userIsLoggedIn){
         page.loadBoardPage();

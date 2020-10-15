@@ -43,25 +43,25 @@ export const page = {
             <div class="scrollbar">
                 <div class="column-container">
                     <div id="todo-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                        <header class="column-header">
+                        <header class="column-header noDrop" ondragover="noAllowDrop(event)">
                             <h3 class="column-name">Todo</h3>
                             <button class="edit-column-button">Edit</button>
                         </header>
-                        <div class="enter-card">
+                        <div class="enter-card noDrop" ondragover="noAllowDrop(event)">
                             <button class="add-card-button">+ Lägg till ett kort</button>
                         </div>
                     </div>
                     <div id="doing-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                        <header class="column-header">
+                        <header class="column-header noDrop" ondragover="noAllowDrop(event)>
                             <h3 class="column-name">Doing</h3>
                             <button class="edit-column-button">Edit</button>
                         </header>
-                        <div class="enter-card">
+                        <div class="enter-card noDrop" ondragover="noAllowDrop(event)>
                             <button class="add-card-button">+ Lägg till ett kort</button>
                         </div>
                     </div>
                     <div id="test-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                        <header class="column-header">
+                        <header class="column-header noDrop" ondragover="noAllowDrop(event)>
                             <h3 class="column-name">Test</h3>
                             <button class="edit-column-button">Edit</button>
                         </header>
@@ -71,11 +71,11 @@ export const page = {
                     
                     </div>
                     <div id="done-column" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                        <header class="column-header">
+                        <header class="column-header noDrop" ondragover="noAllowDrop(event)>
                             <h3 class="column-name">Done</h3>
                             <button class="edit-column-button">Edit</button>
                         </header>
-                        <div class="enter-card">
+                        <div class="enter-card noDrop" ondragover="noAllowDrop(event)>
                             <button class="add-card-button">+ Lägg till ett kort</button>
                         </div>
                     </div>
