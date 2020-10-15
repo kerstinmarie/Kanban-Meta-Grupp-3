@@ -65,7 +65,7 @@ export const page = {
                             <h3 class="column-name">Test</h3>
                             <button class="edit-column-button">Edit</button>
                         </header>
-                        <div class="enter-card">
+                        <div class="enter-card noDrop" ondragover="noAllowDrop(event)">
                             <button class="add-card-button">+ Lägg till ett kort</button>
                         </div>
                     
@@ -115,7 +115,19 @@ export const page = {
             par.setAttribute("ondragover", "noAllowDrop(event)");
             par.innerText = ``;
             card.append(button, par, editButton);
+            console.log(e.target.parentNode.childNodes[2]);
+            console.log(e.target.parentNode.childNodes);
             e.target.parentNode.insertBefore(card, e.target.parentNode.childNodes[2]);
+
+            const test = document.createElement("div");
+            test.setAttribute("ondrop","drop(event)");
+            test.setAttribute("ondragover","allowDrop(event)");
+            test.setAttribute("class","test");
+
+            console.log(test);
+
+            e.target.parentNode.insertBefore(test,card);
+
             editButton.click();
         }
     },
@@ -159,10 +171,15 @@ export const page = {
     },
     deleteCard: function (e) {
         if (page.editing) {
-            let editOverlay = document.getElementById("editOverlay");
+            console.log(e.target.parentNode.parentNode);
+            console.log(e.target.parentNode);
+            let editOverlay = document.getElementById("editOverlay") != null ? e.target.parentNode : e.target.parentNode;
             editOverlay.remove();
         }
+        console.log(e.target);
+        //e.target.parentNode.previousSibling.remove();
         e.target.parentNode.remove();
+
         page.editing = false;
 
     },
@@ -173,6 +190,7 @@ export const page = {
             parentText.contentEditable = true;
             let editOverlay = document.createElement("div");
             editOverlay.setAttribute("id", "editOverlay");
+            console.log(e.target.parentNode.parentNode);
             e.target.parentNode.parentNode.append(editOverlay);
             let oldIndex = e.target.parentNode.style.zIndex;
             e.target.parentNode.style.zIndex = '11';
