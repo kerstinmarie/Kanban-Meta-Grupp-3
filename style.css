@@ -65,7 +65,7 @@ h1,h2,h3{
    font-family: 'Bitter', serif;
 }
 h1{
-   font-size: 2.5rem;
+   font-size: 1.9rem;
    font-weight: 700;
    line-height: 1.5em;
    text-align: center;
@@ -76,7 +76,7 @@ h2{
    font-size: 0.95rem;
    text-align: left;
    font-weight: 700;
-   line-height: 1.3em;
+   line-height: 2.2rem;
 }
 h3{
    font-size: 0.95rem;
@@ -96,95 +96,90 @@ p{
 Header 
 ************/
 header.page-header{
-   height: 80px;
-   padding: 20px 6% 0 6%;
+   height: 100px;
+   padding: 20px 4% 0 4%;
    background-color:#A4A4AB;
    background-image: linear-gradient(180deg, #01314d, #0079bf);
 }
-/*Lagt till flex*/
 .flex-container{
    display: flex;
-   flex-direction: row;
+   flex-direction: column;
 }
 .empty-keeper{
-   flex: 33%;
+   flex: 0;
 }
 .logo-keeper{
-   max-width: 100%;
-   padding-left: 150px;
-   margin:  0 auto;
-   flex: 33%;
+   flex: 100%;
+   margin-bottom: 10px;
 }
 h2.logotext {
    display: inline-block;
-   width: 300px;
+   width: 100%;
    font-family:'Anton', sans-serif;
    text-align: center;
    font-weight: 400;
-   font-size: 2.5rem;
+   font-size: 2.2rem;
    color: #ffffff;
 }
 .button-keeper{
    display: flex;
    flex-direction: row;
-   width: 33%;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
  }
- .header-button{
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 10px 0 0;
- }
-button#logout-button,
-button#save-board-button{
-   width: 150px;
-   margin-bottom: 10px;
+.header-button{
+   height: 30px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+button#logout-button{
+   width: 120px;
    padding: 0;
    border-radius: 20px;
    color: #01314d;
    font-weight: bold;
    background-image: linear-gradient( #ffffff, #bf4600);
-   font-size: 1rem;
+   font-size: .95rem;
    cursor: pointer;
    outline: none;
 }
 button#logout-button:hover,
-button#logout-button:focus,
-button#save-board-button:hover,
-button#save-board-button:focus{
+button#logout-button:focus{
    background-image: linear-gradient(180deg, #ffffff, #ffffff);
    color:  #0079bf;
 }
-/*background-image: linear-gradient(0deg, #01314d, #0079bf);*/
-/*background-image: linear-gradient(#0ebb1d, #00bfbf);*/
 /************
 Main
 ************/
 .main{
    height: 750px;
-   padding: 0 6%;
+   padding: 0 4%;
    background-color: #0079bf;
+}
+.start{
+   height: auto;
    overflow: hidden;
 }
 .login-container{
    height: auto;
-   width: 30%;
-   margin: 150px auto 0 auto;
-   padding: 20px 4% 55px 4%;
+   width: 92%;
+   margin: 0 auto 30px auto;
+   padding: 5px 4% 45px 4%;
    border-radius: 7px;
    background-color:#ebecf0;
 }
 .error-statement{
    color: red;
-   font-size: 1.1rem;
+   font-size: 0.95rem;
    font-weight: bold;
    margin-bottom: 10px;
 }
 label{
    display: inline-block;
    color: #0079bf;
-   font-size: 1.2rem;
+   font-size: 1.1rem;
    font-weight: 700;
 }
 input#username,
@@ -207,32 +202,37 @@ button#login-button{
    font-weight: bold;
    width: 100%;
    background-image: linear-gradient(0deg, #01314d, #0079bf);
-   font-size: 1rem;
+   font-size: 0.9rem;
    cursor: pointer;
    outline: none;
 }
 button#login-button:hover{
    background-image: linear-gradient(#0079bf, #0079bf);
 }
+.scrollbar{
+   clear: both;
+   min-width: 292px;
+   height: 750px;
+   overflow-x: scroll;
+   overflow-y: hidden;
+}
 .column-container{
-   /*width: 78%;*/
    float: left;
    width: 1255px;
    margin: 0;
 }
 .column{
-   position: relative; /*LA TILL FÖR ATT KUNNA ANVÄNDA POSITION ABSOLUTE PÅ EDIT-COLUMN-BUTTON (FÖR ATT KUNNA LÄGGA DEN I HÖRNET LÄNGST UPP I HÖGRA HÖRNET PÅ KOLUMNEN*/
    float: left;
    background-color:#ebecf0;
    width: 272px;
    margin: 10px 5px;
    padding: 10px 20px 10px 10px;
    min-height: 100px;
-   max-height: 700px;
+   max-height: 680px;
    border-radius: 7px;
    text-align: center;
    text-align: left;
-   overflow: auto;
+   overflow-x: auto;
    border-bottom: 1px solid #444444;
    border-right: 1px solid #444444;
 }
@@ -241,10 +241,10 @@ button#login-button:hover{
    min-height: 20px;
 }
 
+/***************************/
 .column-name{
    outline: none;
 }
-
 .edit-column-button, .column-edit-done-button{
    position: absolute;
    right: 25px;
@@ -381,6 +381,138 @@ Footer
    margin-bottom: 10px;
    background-image: linear-gradient(0deg, #01314d, #0079bf);
 }
+@media screen and (min-width: 480px){
+   /************
+   Basic
+   ************/
+   h1{
+     font-size: 2.2rem;
+   }
+   /************
+   Header
+   ************/
+   h2.logotext {
+      font-size: 2.35rem;
+   }
+   .header-button{
+      height: 35px;
+   }
+   button#logout-button,
+   button#save-board-button{
+      width: 135px;
+      font-size: 1rem;
+   }
+   /************
+   Main
+   ************/
+   .main{
+      padding: 0 6%;
+   }
+   .login-container{
+      width: 70%;
+      margin: 0 auto 150px auto;
+   }
+   .error-statement{
+      font-size: 1.05rem;
+   }
+   label{
+      font-size: 1.15rem;
+   }
+   button#login-button{
+      font-size: 1rem;
+   }
+   }
+   @media screen and (min-width: 768px){
+   /************
+   Basic
+   ************/
+   h1{
+      font-size: 2.5rem;
+   }
+   /************
+   Header
+   ************/
+   header.page-header{
+      height: 80px;
+      padding: 20px 4% 0 4%;
+   }
+   .flex-container{
+      display: flex;
+      flex-direction: row;
+   }
+   .empty-keeper{
+      flex: 33%;
+   }
+   .logo-keeper{
+      flex: 33%;
+   }
+   h2.logotext {
+      font-size: 2.5rem;
+      text-align: center;
+   }
+   .button-keeper{
+      justify-content: flex-end;
+      width: 33%;
+    }
+   .header-button{
+      height: 35px;
+      margin-bottom: 10px;
+   }
+   button#logout-button{
+      font-size: 1rem;
+   }
+   /************
+   Main
+   ************/
+   .main{
+      height: 750px;
+      padding: 0 6%;
+      background-color: #0079bf;
+      overflow: hidden;
+   }
+   .login-container{
+      width: 50%;
+      margin: 150px auto 0 auto;
+   }
+   .error-statement{
+      font-size: 1.1rem;
+   }
+   label{
+      font-size: 1.2rem;
+   }
+   button#login-button{
+      font-size: 1rem;
+   }
+   }
+   @media screen and (min-width: 1024px){
+   /************
+   Header
+   ************/
+   h2.logotext {
+      font-size: 2.6rem;
+      margin: 5px 0 7px 0;
+   }
+   .header-button{
+      height: 40px;
+      margin-bottom: 12px;
+   }
+   /************
+   Main
+   ************/
+   .login-container{
+      width: 30%;
+   }
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
 
 
 
