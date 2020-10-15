@@ -156,12 +156,13 @@ export const page = {
         })
     },
     deleteCard: function (e) {
-        if(page.editing){
-            let editOverlay = document.getElementById("editOverlay");        
+        if (page.editing) {
+            let editOverlay = document.getElementById("editOverlay");
             editOverlay.remove();
         }
         e.target.parentNode.remove();
         page.editing = false;
+
     },
     editCard: function (e) {
         if (page.editing == false) {
@@ -201,7 +202,7 @@ export const page = {
                 editOverlay.remove();
             });
             page.editing = true;
-            
+
         }
     },
     editColumnName: function (e) {
@@ -214,13 +215,14 @@ export const page = {
             btn.innerHTML = "Save";
             e.target.parentNode.append(btn);
             parentText.focus();
+            page.editing = true;
             btn.addEventListener("click", function () {
                 parentText.contentEditable = false;
                 e.target.parentNode.removeChild(btn);
                 e.target.style.display = "block";
                 page.editing = false;
             });
-            page.editing = true;
+
         }
     },
     loadLoginPage: function () {
