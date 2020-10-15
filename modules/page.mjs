@@ -237,20 +237,21 @@ export const page = {
         eventHandlers.addEditColumnNameEventHandlers();
         page.renderBoardFromSavedCards(data.getCardsFromLocalStorage());
         eventHandlers.addOnLogoutBtnClickEventHandlers();
-
-
-
-        ////provisorisk kod för card order save
-
-        console.log("get cards order", data.getCardsOrder());
     },
     renderBoardFromSavedCards: function (board) {
+        //tar inga argument... jämför cardsOrder-objektet med board-objektet och renderar board page i rätt ordning
         const boardColumnsElements = document.getElementsByClassName("column");
-        console.log("boardColumnsElements", boardColumnsElements)
+        const cardsOrder = data.getCardsOrderFromLocalStorage();
         if (board) {
-            Object.keys(board).forEach(k => {
-                const [cardElement, column, id] = this.createCardFromSaved(board[k]);
-                this.addCardToBoardFromSaved(cardElement, column, id, boardColumnsElements);
+            Object.keys(cardsOrder).forEach(column => {
+                Object.keys(cardsOrder[column]).forEach(index => {
+                    Object.keys(board).forEach(k => {
+                        if (board[k].id === cardsOrder[column][index]["cardId"]) {
+                            const [cardElement, column, id] = this.createCardFromSaved(board[k]);
+                            this.addCardToBoardFromSaved(cardElement, column, id, boardColumnsElements);
+                        }
+                    })
+                })
             })
         }
     },

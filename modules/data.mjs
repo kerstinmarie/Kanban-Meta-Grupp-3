@@ -53,7 +53,7 @@ export const data = {
             column = element.parentNode.parentNode.getElementsByClassName("column-name")[0].innerText;
             page.creatingNewCard = false;
         } else {
-            column = element.parentNode.parentNode.getElementsByClassName("column-name")[0].innerText;
+            column = element.parentNode.getElementsByClassName("column-name")[0].innerText;
         }
         console.log("desc:", description, "id", id, "col", column);
         return [id, { column: column, description: description, id: id }];
@@ -91,7 +91,7 @@ export const data = {
         console.log("updated Storage", updatedStorage);
         localStorage.setItem("board", JSON.stringify(updatedStorage));
     },
-    getCardsOrder: function () {
+    getCardsOrderFromDOM: function () {
         /*tar inga argument, returnerar ett objekt med föjande format 
         obj = {
             kolumnNamn1:{
@@ -138,10 +138,29 @@ export const data = {
         return cardOrderObject;
 
     },
+    getCardsOrderFromLocalStorage: function () {
+        /*returnerar ett objekt med föjande format 
+        obj = {
+            kolumnNamn1:{
+                ordningsnumer1:{
+                    cardId: kortid
+                },
+                ordningsnummer2:{
+                    cardId: kortid
+                }
+            },
+            kolumnnamn2:{
+                ordningsnummer1:{
+                    cardid:kortid......
+                }....
+            }....
+            }*/
+        return JSON.parse(localStorage.getItem("cardOrder"));
+    },
     saveCardsOrderToLocalStorage: function () {
         /*hämtar, stringifyar och sparar getCardsOrder-objektet i localstorage*/
         console.log("saving cards order");
-        const cardsOrderObject = this.getCardsOrder();
+        const cardsOrderObject = this.getCardsOrderFromDOM();
         localStorage.setItem("cardOrder", JSON.stringify(cardsOrderObject));
     }
 }
