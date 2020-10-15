@@ -164,6 +164,11 @@ export const page = {
             e.target.style.display = "none";
             let parentText = e.target.parentNode.getElementsByClassName("card-description")[0];
             parentText.contentEditable = true;
+            let editOverlay = document.createElement("div");
+            editOverlay.setAttribute("id", "editOverlay");
+            e.target.parentNode.parentNode.append(editOverlay);
+            let oldIndex = e.target.parentNode.style.zIndex;
+            e.target.parentNode.style.zIndex = '11';
             let btn = document.createElement("button");
             btn.setAttribute("class", "edit-done-button");
             btn.innerHTML = "Save";
@@ -177,17 +182,21 @@ export const page = {
                 e.target.style.display = "block";
                 data.saveCardToLocalStorage(e.target.parentNode);
                 page.editing = false;
+                e.target.parentNode.style.zIndex = oldIndex;
+                editOverlay.remove();
+            });
+            editOverlay.addEventListener("click", function () {
+                saved = true;
+                parentText.contentEditable = false;
+                e.target.parentNode.removeChild(btn);
+                e.target.style.display = "block";
+                data.saveCardToLocalStorage(e.target.parentNode);
+                page.editing = false;
+                e.target.parentNode.style.zIndex = oldIndex;
+                editOverlay.remove();
             });
             page.editing = true;
-            window.addEventListener('click', function clickOutsideCardSaveEvent(ev){   
-                if (!e.target.parentNode.contains(ev.target) && saved != true && !e.target.parentNode.parentNode.getElementsByClassName("add-card-button")[0].contains(ev.target)){
-                    parentText.contentEditable = false;
-                    e.target.parentNode.removeChild(btn);
-                    e.target.style.display = "block";
-                    page.editing = false;
-                    window.removeEventListener('click', clickOutsideCardSaveEvent);
-                }
-            });
+            
         }
     },
     editColumnName: function (e) {
