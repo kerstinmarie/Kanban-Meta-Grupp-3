@@ -171,7 +171,7 @@ export const page = {
         if (page.editing) {
             console.log(e.target.parentNode.parentNode);
             console.log(e.target.parentNode);
-            let editOverlay = document.getElementById("editOverlay") != null ? e.target.parentNode : e.target.parentNode;
+            let editOverlay = document.getElementById("editOverlay") != null ?  document.getElementById("editOverlay") : e.target.parentNode;
             editOverlay.remove();
         }
         console.log(e.target);
