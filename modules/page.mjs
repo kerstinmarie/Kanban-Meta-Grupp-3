@@ -1,6 +1,25 @@
 import { data } from "./data.mjs";
 import { eventHandlers } from "./eventHandlers.mjs";
-
+//#region drag & drop handlers
+window.allowDrop = function(e) {
+    e.preventDefault();
+  }
+  
+ window.drag = function(e) {
+    e.dataTransfer.setData("div", e.target.id);
+  }
+  
+ window.drop = function(e) {
+    e.preventDefault();
+    
+    const droppedCard = e.dataTransfer.getData("div");
+    const divContainerClass = e.target.className;
+    //Tillåter endast droppa inutti column eller dropZoneDiv
+    if(divContainerClass == "column" || divContainerClass == "dropZoneDiv" ){
+        e.target.appendChild(document.getElementById(droppedCard));
+    }
+  }
+//#endregion
 export const page = {
     getFrontPage: function () {
         return `
