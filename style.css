@@ -213,7 +213,6 @@ button#login-button:hover{
    clear: both;
    min-width: 292px;
    height: 750px;
-   overflow-x: scroll;
    overflow-y: hidden;
 }
 .column-container{
@@ -240,7 +239,6 @@ button#login-button:hover{
    width: 252px;
    min-height: 20px;
 }
-
 /***************************/
 .column-name{
    outline: none;
@@ -258,30 +256,24 @@ button#login-button:hover{
    outline: none;
    opacity: 0.1;
 }
-
 .column-edit-done-button{
    color: darkblue;
    opacity: 0.5;
    margin-right: 5px;
-
 }
-
 .column:hover .edit-column-button{
    color: darkblue;
    opacity: 0.5;
 }
-
 .column:hover .edit-column-button:hover, .column:hover .column-edit-done-button:hover{
    opacity: 1;
 }
 /* ----------------------------------------------------------------------CARDS */
-
 .dropZoneDiv{
    min-height: 20px;
 }
-
 .card{
-   position: relative;    /*LA TILL FÖR ATT KUNNA ANVÄNDA POSITION ABSOLUTE PÅ TA-BORT-KNAPP (FÖR ATT KUNNA LÄGGA DEN I HÖRNET LÄNGST UPP I HÖGRA HÖRNET PÅ KORTET*/
+   position: relative;   
    display: inline-block;
    width: 252px;
    min-height: 20px;
@@ -294,25 +286,19 @@ button#login-button:hover{
    cursor: pointer;
    overflow-wrap: break-word;
 }
-.card:hover{
-   min-height: 90px;
-}
 .enter-card{
    width: 252px;
    min-height: 20px;
    margin: 10px 0;
    cursor: pointer;
 }
-
 .add-card-button{
    cursor: pointer;
    outline: none;
 }
-
 .add-card-button:hover {
    color: darkblue;
 }
-
 .delete-card-btn{
    position: absolute;
    right: 10px;
@@ -326,7 +312,9 @@ button#login-button:hover{
    outline: none;
    opacity: 0.1;
 }
-
+.card:hover{
+   min-height: 90px;
+}
 .card:hover .delete-card-btn{
    color: red;
    opacity: 0.5;
@@ -335,7 +323,8 @@ button#login-button:hover{
    color: red;
    opacity: 1;
 }
-.edit-card-button, .edit-done-button{
+.edit-card-button, 
+.edit-done-button{
    font-size: 12px;
    font-weight: bold;
    position: absolute;
@@ -347,25 +336,21 @@ button#login-button:hover{
    outline: none;
    background-color: transparent; 
 }
-
 .edit-done-button{
    opacity: 0.5;
 }
-
 .card:hover .edit-card-button{
    opacity: 0.5;
 }
-
 .card:hover .edit-done-button:hover, .card:hover .edit-card-button:hover
 {
    opacity: 1;
 }
-
-p:focus{
+p:focus,
+p:hover{
    color: darkblue;
    outline: none;
 }
-
 #editOverlay{
    opacity:0.8;
    background-color:#ccc;
@@ -376,7 +361,6 @@ p:focus{
    left:0px;
    z-index:1;
 }
-
 /************
 Footer
 ************/
