@@ -33,7 +33,6 @@ export const data = {
     },
     logoutUsers: function () {
         localStorage.removeItem("currentUser");
-        console.log(localStorage, "currentUser");
         page.loadLoginPage();
     },
     getColumnNames: function () {
