@@ -16,7 +16,7 @@ window.allowDrop = function(e) {
         //Stoppa in ny skapade drop zoner ovanför alla existerande kort
         card.parentNode.insertBefore(dropZoneDiv,card); 
     })
-    e.dataTransfer.setData("div", e.target.id);
+    e.dataTransfer.setData("div", e.target.getAttribute("card-id"));
   }
 
  window.drop = function(e) {
@@ -26,7 +26,9 @@ window.allowDrop = function(e) {
     const divContainer = e.target;
     //Tillåter endast droppa inutti column eller dropZoneDiv
     if(divContainer.className == "column" || divContainer.className == "dropZoneDiv" ){
-        e.target.appendChild(document.getElementById(droppedCard));
+        console.log((document.querySelector(`div[card-id="${droppedCard}"]`)));
+        e.target.appendChild(document.querySelector(`div[card-id="${droppedCard}"]`));
+        
         //Tar bort alla drop zoner om de inte innehåller ett kort.
         allDropZones.forEach(e => { 
             if(e.childElementCount == 0){
@@ -127,7 +129,7 @@ export const page = {
         if (page.editing == false) {
 
             const card = document.createElement("div");
-            this.setMultipleAttributes(card,{class:"card",id:this.cardNr +=1,draggable:"true",ondragstart:"drag(event)"});
+            this.setMultipleAttributes(card,{class:"card",draggable:"true",ondragstart:"drag(event)"});
             card.setAttribute("card-id", `${new Date().getTime()}`) //kortet får ett unikt attribut så att vi inte skapar dubbletter.
 
             const button = document.createElement("button");
@@ -144,28 +146,16 @@ export const page = {
             par.setAttribute("class", "card-description");
             par.innerText = ``;
             card.append(button, par, editButton);
-            console.log(e.target.parentNode.childNodes[2]);
-            console.log(e.target.parentNode.childNodes);
             e.target.parentNode.insertBefore(card, e.target.parentNode.childNodes[2]);
-
-            const dropZoneDiv = document.createElement("div");
-            dropZoneDiv.setAttribute("ondrop","drop(event)");
-            dropZoneDiv.setAttribute("ondragover","allowDrop(event)");
-            dropZoneDiv.setAttribute("class","dropZoneDiv");
-
-            e.target.parentNode.insertBefore(dropZoneDiv,card);
 
             editButton.click();
         }
     },
     createCardFromSaved: function (card) {
         const element = document.createElement("div");
-        element.setAttribute("class", "card");
 
+        this.setMultipleAttributes(element,{class:"card",draggable:"true",ondragstart:"drag(event)"})
         element.setAttribute("card-id", `${card.id}`);
-        element.setAttribute("draggable", "true");
-        element.setAttribute("ondragstart", "drag(event)");
-        element.setAttribute("id", this.cardNr += 1);
 
         const button = document.createElement("button");
         button.setAttribute("class", "delete-card-btn");
@@ -199,8 +189,6 @@ export const page = {
             let editOverlay = document.getElementById("editOverlay") != null ?  document.getElementById("editOverlay") : e.target.parentNode;
             editOverlay.remove();
         }
-        console.log(e.target);
-        //e.target.parentNode.previousSibling.remove();
         e.target.parentNode.remove();
 
         page.editing = false;
@@ -295,7 +283,6 @@ export const page = {
     },
     creatingNewCard: false,
     editing: new Boolean(false),
-    cardNr: 0,
     setMultipleAttributes: function(element,attributes) {
         Object.keys(attributes).forEach(key=> element.setAttribute(key,attributes[key]));
     }

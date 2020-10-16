@@ -277,7 +277,7 @@ button#login-button:hover{
 /* ----------------------------------------------------------------------CARDS */
 
 .dropZoneDiv{
-   min-height: 20px;
+   min-height: 10px;
 }
 
 .card{
