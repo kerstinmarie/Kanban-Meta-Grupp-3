@@ -4,9 +4,10 @@ import { eventHandlers } from "./eventHandlers.mjs";
 window.allowDrop = function(e) {
     e.preventDefault();
   }
-  
+
  window.drag = function(e) {
     const allCards = document.querySelectorAll('.card');
+
 
     allCards.forEach(card => {
         const dropZoneDiv = document.createElement("div");
@@ -34,6 +35,7 @@ window.allowDrop = function(e) {
     }
   }
 //#endregion
+
 export const page = {
     getFrontPage: function () {
         return `
@@ -125,8 +127,8 @@ export const page = {
         if (page.editing == false) {
 
             const card = document.createElement("div");
-            //kortet får ett unikt attribut så att vi inte skapar dubbletter.
-            this.setMultipleAttributes(card,{class:"card",id:this.cardNr +=1 ,cardId:`${new Date().getTime()}`,draggable:"true",ondragstart:"drag(event)"});
+            this.setMultipleAttributes(card,{class:"card",id:this.cardNr +=1,draggable:"true",ondragstart:"drag(event)"});
+            card.setAttribute("card-id", `${new Date().getTime()}`) //kortet får ett unikt attribut så att vi inte skapar dubbletter.
 
             const button = document.createElement("button");
             button.setAttribute("class", "delete-card-btn");
@@ -139,7 +141,7 @@ export const page = {
             eventHandlers.addEditCardEventHandler(editButton);
 
             const par = document.createElement("p");
-            par.setAttribute("class", "card-description noDrop");
+            par.setAttribute("class", "card-description");
             par.innerText = ``;
             card.append(button, par, editButton);
             console.log(e.target.parentNode.childNodes[2]);
@@ -160,7 +162,7 @@ export const page = {
         const element = document.createElement("div");
         element.setAttribute("class", "card");
 
-        element.setAttribute("cardId", `${card.id}`);
+        element.setAttribute("card-id", `${card.id}`);
         element.setAttribute("draggable", "true");
         element.setAttribute("ondragstart", "drag(event)");
         element.setAttribute("id", this.cardNr += 1);
