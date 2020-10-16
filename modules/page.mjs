@@ -18,9 +18,9 @@ window.allowDrop = function(e) { //Visar vart man kan droppa kortet
     })
     e.dataTransfer.setData("div", e.target.getAttribute("card-id")); //sparar kortet som man drar
   }
-
  window.drop = function(e) { //hanterar vad som sker när man sätter ner kortet
     e.preventDefault();
+    console.log(e.target);
     const allDropZones = document.querySelectorAll('.dropZoneDiv'); //Hämtar alla drop zoner som skapades under drag event.
     const droppedCard = e.dataTransfer.getData("div"); //hämtar kortet man drog
     const divContainer = e.target;
@@ -28,13 +28,13 @@ window.allowDrop = function(e) { //Visar vart man kan droppa kortet
     if(divContainer.className == "column" || divContainer.className == "dropZoneDiv" ){
         console.log((document.querySelector(`div[card-id="${droppedCard}"]`)));
         e.target.appendChild(document.querySelector(`div[card-id="${droppedCard}"]`));
-        
-        //Tar bort alla drop zoner om de inte innehåller ett kort.
-        allDropZones.forEach(e => { 
-            if(e.childElementCount == 0){
-                e.remove()
-            }})
     }
+
+    //Tar bort alla drop zoner om de inte innehåller ett kort.
+    allDropZones.forEach(e => { 
+        if(e.childElementCount == 0){
+            e.remove()
+        }})
   }
 //#endregion
 
