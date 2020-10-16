@@ -148,9 +148,7 @@ export const page = {
 
         const par = document.createElement("p");
         par.setAttribute("class", "card-description");
-        par.innerText = `
-        ${card.description}
-        `;
+        par.innerText = `${card.description}`;
         element.append(button, par, editButton);
         return [element, card.column, card.id];
     },
@@ -182,20 +180,28 @@ export const page = {
             e.target.style.display = "none";
             let parentText = e.target.parentNode.getElementsByClassName("card-description")[0];
             parentText.contentEditable = true;
+            parentText.focus();
+           
+            let oldIndex = e.target.parentNode.style.zIndex;
+            e.target.parentNode.style.zIndex = '11';
+            
             let editOverlay = document.createElement("div");
             editOverlay.setAttribute("id", "editOverlay");
             console.log(e.target.parentNode.parentNode);
             e.target.parentNode.parentNode.append(editOverlay);
-            let oldIndex = e.target.parentNode.style.zIndex;
-            e.target.parentNode.style.zIndex = '11';
+            editOverlay.addEventListener("click", function () {
+                saveCard();
+            });
+           
             let btn = document.createElement("button");
             btn.setAttribute("class", "edit-done-button");
             btn.innerHTML = "Save";
             e.target.parentNode.append(btn);
-            parentText.focus();
-            let saved = false;
             btn.addEventListener("click", function () {
-                saved = true;
+                saveCard();
+            });
+           
+            let saveCard = function(){
                 parentText.contentEditable = false;
                 e.target.parentNode.removeChild(btn);
                 e.target.style.display = "block";
@@ -204,19 +210,8 @@ export const page = {
                 page.editing = false;
                 e.target.parentNode.style.zIndex = oldIndex;
                 editOverlay.remove();
-            });
-            editOverlay.addEventListener("click", function () {
-                saved = true;
-                parentText.contentEditable = false;
-                e.target.parentNode.removeChild(btn);
-                e.target.style.display = "block";
-                data.saveCardToLocalStorage(e.target.parentNode);
-                page.editing = false;
-                e.target.parentNode.style.zIndex = oldIndex;
-                editOverlay.remove();
-            });
+            }
             page.editing = true;
-
         }
     },
     editColumnName: function (e) {
