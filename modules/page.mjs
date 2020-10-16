@@ -6,17 +6,48 @@ window.allowDrop = function(e) {
   }
   
  window.drag = function(e) {
+    const allCards = document.querySelectorAll('.card');
+
+    allCards.forEach(card => {
+        const dropZoneDiv = document.createElement("div");
+        //Sätter in rel. attribute för att kunna droppa element i dropZone
+        page.setMultipleAttributes(dropZoneDiv, { ondrop: "drop(event)", ondragover: "allowDrop(event)", class:"dropZoneDiv"}); 
+        //Stoppa in ny skapade drop zoner ovanför alla existerande kort
+        card.parentNode.insertBefore(dropZoneDiv,card); 
+    })
     e.dataTransfer.setData("div", e.target.id);
   }
   
+  /*
  window.drop = function(e) {
     e.preventDefault();
+    var data = e.dataTransfer.getData("div");
+    const allDropZones = document.querySelectorAll('.dropZoneDiv');
     
+    console.log(e.target.className);
+    if(e.target.className == "column" || e.target.className == "dropZoneDiv" ){
+        e.target.appendChild(document.getElementById(data));
+        allDropZones.forEach(e => { 
+            if(e.childElementCount == 0){
+                e.remove()
+            }})
+    }
+  }
+*/
+
+ window.drop = function(e) {
+    e.preventDefault();
+    const allDropZones = document.querySelectorAll('.dropZoneDiv'); //Hämtar alla drop zoner som skapades under drag event.
     const droppedCard = e.dataTransfer.getData("div");
     const divContainerClass = e.target.className;
     //Tillåter endast droppa inutti column eller dropZoneDiv
     if(divContainerClass == "column" || divContainerClass == "dropZoneDiv" ){
         e.target.appendChild(document.getElementById(droppedCard));
+        //Tar bort alla drop zoner om de inte innehåller ett kort.
+        allDropZones.forEach(e => { 
+            if(e.childElementCount == 0){
+                e.remove()
+            }})
     }
   }
 //#endregion
@@ -283,6 +314,8 @@ export const page = {
     },
     creatingNewCard: false,
     editing: new Boolean(false),
-    cardNr: 0
-
+    cardNr: 0,
+    setMultipleAttributes: function(element,attributes) {
+        Object.keys(attributes).forEach(key=> element.setAttribute(key,attributes[key]));
+    }
 }
