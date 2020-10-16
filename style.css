@@ -276,13 +276,16 @@ button#login-button:hover{
 }
 /* ----------------------------------------------------------------------CARDS */
 
+.dropZoneDiv{
+   min-height: 20px;
+}
 
 .card{
    position: relative;    /*LA TILL FÖR ATT KUNNA ANVÄNDA POSITION ABSOLUTE PÅ TA-BORT-KNAPP (FÖR ATT KUNNA LÄGGA DEN I HÖRNET LÄNGST UPP I HÖGRA HÖRNET PÅ KORTET*/
    display: inline-block;
    width: 252px;
    min-height: 20px;
-   margin: 10px 0 0 0;
+   margin: 5px 0 0 0;
    padding: 10px;
    border-radius: 7px;
    background-color: #ffffff;

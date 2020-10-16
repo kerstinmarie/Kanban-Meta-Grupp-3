@@ -53,7 +53,7 @@ export const data = {
             column = element.parentNode.parentNode.getElementsByClassName("column-name")[0].innerText;
             page.creatingNewCard = false;
         } else {
-            column = element.parentNode.getElementsByClassName("column-name")[0].innerText;
+            column = element.parentNode.parentNode.getElementsByClassName("column-name")[0].innerText;
         }
         console.log("desc:", description, "id", id, "col", column);
         return [id, { column: column, description: description, id: id }];
