@@ -17,31 +17,14 @@ window.allowDrop = function(e) {
     })
     e.dataTransfer.setData("div", e.target.id);
   }
-  
-  /*
- window.drop = function(e) {
-    e.preventDefault();
-    var data = e.dataTransfer.getData("div");
-    const allDropZones = document.querySelectorAll('.dropZoneDiv');
-    
-    console.log(e.target.className);
-    if(e.target.className == "column" || e.target.className == "dropZoneDiv" ){
-        e.target.appendChild(document.getElementById(data));
-        allDropZones.forEach(e => { 
-            if(e.childElementCount == 0){
-                e.remove()
-            }})
-    }
-  }
-*/
 
  window.drop = function(e) {
     e.preventDefault();
     const allDropZones = document.querySelectorAll('.dropZoneDiv'); //Hämtar alla drop zoner som skapades under drag event.
     const droppedCard = e.dataTransfer.getData("div");
-    const divContainerClass = e.target.className;
+    const divContainer = e.target;
     //Tillåter endast droppa inutti column eller dropZoneDiv
-    if(divContainerClass == "column" || divContainerClass == "dropZoneDiv" ){
+    if(divContainer.className == "column" || divContainer.className == "dropZoneDiv" ){
         e.target.appendChild(document.getElementById(droppedCard));
         //Tar bort alla drop zoner om de inte innehåller ett kort.
         allDropZones.forEach(e => { 
@@ -142,12 +125,8 @@ export const page = {
         if (page.editing == false) {
 
             const card = document.createElement("div");
-            card.setAttribute("class", "card");
-
-            card.setAttribute("card-id", `${new Date().getTime()}`) //kortet får ett unikt attribut så att vi inte skapar dubbletter.
-            card.setAttribute("draggable", "true");
-            card.setAttribute("ondragstart", "drag(event)");
-            card.setAttribute("id", this.cardNr += 1);
+            //kortet får ett unikt attribut så att vi inte skapar dubbletter.
+            this.setMultipleAttributes(card,{class:"card",id:this.cardNr +=1 ,cardId:`${new Date().getTime()}`,draggable:"true",ondragstart:"drag(event)"});
 
             const button = document.createElement("button");
             button.setAttribute("class", "delete-card-btn");
@@ -181,7 +160,7 @@ export const page = {
         const element = document.createElement("div");
         element.setAttribute("class", "card");
 
-        element.setAttribute("card-id", `${card.id}`);
+        element.setAttribute("cardId", `${card.id}`);
         element.setAttribute("draggable", "true");
         element.setAttribute("ondragstart", "drag(event)");
         element.setAttribute("id", this.cardNr += 1);
