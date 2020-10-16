@@ -294,6 +294,9 @@ button#login-button:hover{
    cursor: pointer;
    overflow-wrap: break-word;
 }
+.card:hover{
+   min-height: 90px;
+}
 .enter-card{
    width: 252px;
    min-height: 20px;
