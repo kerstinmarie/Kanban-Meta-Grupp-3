@@ -98,7 +98,6 @@ export const page = {
             card.setAttribute("draggable", "true");
             card.setAttribute("ondragstart", "drag(event)");
             card.setAttribute("id", this.cardNr += 1);
-            card.setAttribute("ondragover", "noAllowDrop(event)");
 
             const button = document.createElement("button");
             button.setAttribute("class", "delete-card-btn");
@@ -112,7 +111,6 @@ export const page = {
 
             const par = document.createElement("p");
             par.setAttribute("class", "card-description noDrop");
-            par.setAttribute("ondragover", "noAllowDrop(event)");
             par.innerText = ``;
             card.append(button, par, editButton);
             console.log(e.target.parentNode.childNodes[2]);
@@ -137,7 +135,6 @@ export const page = {
         element.setAttribute("draggable", "true");
         element.setAttribute("ondragstart", "drag(event)");
         element.setAttribute("id", this.cardNr += 1);
-        element.setAttribute("ondragover", "noAllowDrop(event)");
 
         const button = document.createElement("button");
         button.setAttribute("class", "delete-card-btn");
@@ -151,7 +148,6 @@ export const page = {
 
         const par = document.createElement("p");
         par.setAttribute("class", "card-description");
-        par.setAttribute("ondragover", "noAllowDrop(event)");
         par.innerText = `
         ${card.description}
         `;
