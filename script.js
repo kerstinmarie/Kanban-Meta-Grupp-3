@@ -16,14 +16,11 @@ window.allowDrop = function(e) {
  window.drop = function(e) {
     e.preventDefault();
     var data = e.dataTransfer.getData("div");
-    e.target.appendChild(document.getElementById(data));
+    console.log(e.target.className);
+    if(e.target.className == "column" || e.target.className == "dropZoneDiv" ){
+        e.target.appendChild(document.getElementById(data));
+    }
   }
-
-
-window.noAllowDrop = function(e) { 
-    e.stopPropagation();
-}
-
 
 function script() {
     if(userIsLoggedIn){
