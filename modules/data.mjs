@@ -33,63 +33,7 @@ export const data = {
     },
     logoutUsers: function () {
         localStorage.removeItem("currentUser");
-        console.log(localStorage, "currentUser");
         page.loadLoginPage();
-    },
-    getColumnNames: function () {
-        const collection = document.getElementsByClassName("column-header");
-        return Object.keys(collection).map(k => {
-            return collection[k].childNodes[1].innerText;
-        });
-    },
-    createCardObjectFromHTMLElement: function (element) {
-        console.log("parentnode", element.parentNode.parentNode);
-        console.log("element", element);
-        console.log(page.creatingNewCard)
-        const description = element.children[1].innerText;
-        let id = element.getAttribute("card-id");
-        let column = "";
-        if (page.creatingNewCard) {             //event.target har olika plats om det är nytt kort eller redigerar gammalt
-            column = element.parentNode.parentNode.getElementsByClassName("column-name")[0].innerText;
-            page.creatingNewCard = false;
-        } else {
-            column = element.parentNode.parentNode.getElementsByClassName("column-name")[0].innerText;
-        }
-        console.log("desc:", description, "id", id, "col", column);
-        return [id, { column: column, description: description, id: id }];
-
-    },
-    saveCardToLocalStorage: function (card) {
-        console.log("save card", card);
-        const [id, newCard] = this.createCardObjectFromHTMLElement(card);
-        let storageToUpdate = this.getCardsFromLocalStorage();
-        if (storageToUpdate === null) {
-            storageToUpdate = {};
-        }
-        storageToUpdate[id] = newCard;
-        localStorage.setItem("board", JSON.stringify(storageToUpdate));
-        console.log("merged storage", storageToUpdate);
-
-    },
-    getCardsFromLocalStorage: function () {
-        return JSON.parse(localStorage.getItem("board"));
-    },
-    deleteCardFromLocalStorage: function (e) {
-        const id = e.target.parentNode.getAttribute("card-id");
-        console.log("tar bort id:", e.target.parentNode.getAttribute("card-id"));
-        let storageToUpdate = this.getCardsFromLocalStorage();
-        const updatedStorage = (() => {
-            let newStorageObj = {};
-            Object.keys(storageToUpdate).forEach(k => {
-                if (k !== id) {
-                    newStorageObj[k] = { description: storageToUpdate[k].description, id: k, column: storageToUpdate[k].column }
-                }
-                console.log("id", k);
-            })
-            return newStorageObj;
-        })();
-        console.log("updated Storage", updatedStorage);
-        localStorage.setItem("board", JSON.stringify(updatedStorage));
     },
     getCardsOrderFromDOM: function () {
         /*tar inga argument, returnerar ett objekt med föjande format 
@@ -136,7 +80,67 @@ export const data = {
             })
         })
         return cardOrderObject;
+    },
+    getColumnNames: function () {
+        const collection = document.getElementsByClassName("column-header");
+        return Object.keys(collection).map(k => {
+            return collection[k].childNodes[1].innerText;
+        });
+    },
+    saveCardToLocalStorage: function (card) {
+        console.log("save card", card);
+        const [id, newCard] = this.createCardObjectFromHTMLElement(card);
+        let storageToUpdate = this.getCardsFromLocalStorage();
+        if (storageToUpdate === null) {
+            storageToUpdate = {};
+        }
+        storageToUpdate[id] = newCard;
+        localStorage.setItem("board", JSON.stringify(storageToUpdate));
+        console.log("merged storage", storageToUpdate);
 
+    },
+    createCardObjectFromHTMLElement: function (element) {
+        console.log("parentnode", element.parentNode.parentNode);
+        console.log("element", element);
+        console.log(page.creatingNewCard)
+        const description = element.children[1].innerText;
+        let id = element.getAttribute("card-id");
+        let column = "";
+        if (page.creatingNewCard) {             //event.target har olika plats om det är nytt kort eller redigerar gammalt
+            column = element.parentNode.parentNode.getElementsByClassName("column-name")[0].innerText;
+            page.creatingNewCard = false;
+        } else {
+            column = element.parentNode.parentNode.getElementsByClassName("column-name")[0].innerText;
+        }
+        console.log("desc:", description, "id", id, "col", column);
+        return [id, { column: column, description: description, id: id }];
+
+    },
+    getCardsFromLocalStorage: function () {
+        return JSON.parse(localStorage.getItem("board"));
+    },
+    deleteCardFromLocalStorage: function (e) { //Funktion som triggas när man tar bort kort. Se: onDeleteCardClickEventHandler i eventhandlers
+        const id = e.target.parentNode.getAttribute("card-id");
+        console.log("tar bort id:", e.target.parentNode.getAttribute("card-id"));
+        let storageToUpdate = this.getCardsFromLocalStorage();
+        const updatedStorage = (() => {
+            let newStorageObj = {};
+            Object.keys(storageToUpdate).forEach(k => {
+                if (k !== id) {
+                    newStorageObj[k] = { description: storageToUpdate[k].description, id: k, column: storageToUpdate[k].column }
+                }
+                console.log("id", k);
+            })
+            return newStorageObj;
+        })();
+        console.log("updated Storage", updatedStorage);
+        localStorage.setItem("board", JSON.stringify(updatedStorage));
+    },
+    saveCardsOrderToLocalStorage: function () {
+        /*hämtar, stringifyar och sparar getCardsOrder-objektet i localstorage*/
+        console.log("saving cards order");
+        const cardsOrderObject = this.getCardsOrderFromDOM();
+        localStorage.setItem("cardOrder", JSON.stringify(cardsOrderObject));
     },
     getCardsOrderFromLocalStorage: function () {
         /*returnerar ett objekt med föjande format 
@@ -156,12 +160,6 @@ export const data = {
             }....
             }*/
         return JSON.parse(localStorage.getItem("cardOrder"));
-    },
-    saveCardsOrderToLocalStorage: function () {
-        /*hämtar, stringifyar och sparar getCardsOrder-objektet i localstorage*/
-        console.log("saving cards order");
-        const cardsOrderObject = this.getCardsOrderFromDOM();
-        localStorage.setItem("cardOrder", JSON.stringify(cardsOrderObject));
     }
 }
 

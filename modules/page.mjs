@@ -1,5 +1,42 @@
 import { data } from "./data.mjs";
 import { eventHandlers } from "./eventHandlers.mjs";
+//#region drag & drop handlers
+window.allowDrop = function(e) { //Visar vart man kan droppa kortet
+    e.preventDefault();
+  }
+
+ window.drag = function(e) { //Hanterar vad som händer när man drar runt kortet
+    const allCards = document.querySelectorAll('.card');
+
+
+    allCards.forEach(card => {
+        const dropZoneDiv = document.createElement("div");
+        //Sätter in rel. attribute för att kunna droppa element i dropZone
+        page.setMultipleAttributes(dropZoneDiv, { ondrop: "drop(event)", ondragover: "allowDrop(event)", class:"dropZoneDiv"}); 
+        //Stoppa in ny skapade drop zoner ovanför alla existerande kort
+        card.parentNode.insertBefore(dropZoneDiv,card); 
+    })
+    e.dataTransfer.setData("div", e.target.getAttribute("card-id")); //sparar kortet som man drar
+  }
+ window.drop = function(e) { //hanterar vad som sker när man sätter ner kortet
+    e.preventDefault();
+    console.log(e.target);
+    const allDropZones = document.querySelectorAll('.dropZoneDiv'); //Hämtar alla drop zoner som skapades under drag event.
+    const droppedCard = e.dataTransfer.getData("div"); //hämtar kortet man drog
+    const divContainer = e.target;
+    //Tillåter endast droppa inutti column eller dropZoneDiv
+    if(divContainer.className == "column" || divContainer.className == "dropZoneDiv" ){
+        console.log((document.querySelector(`div[card-id="${droppedCard}"]`)));
+        e.target.appendChild(document.querySelector(`div[card-id="${droppedCard}"]`));
+    }
+
+    //Tar bort alla drop zoner om de inte innehåller ett kort.
+    allDropZones.forEach(e => { 
+        if(e.childElementCount == 0){
+            e.remove()
+        }})
+  }
+//#endregion
 
 export const page = {
     getFrontPage: function () {
@@ -90,15 +127,12 @@ export const page = {
     addCard: function (e) {
         page.creatingNewCard = true;
         if (page.editing == false) {
-
+            //Skapa kort
             const card = document.createElement("div");
-            card.setAttribute("class", "card");
-
+            this.setMultipleAttributes(card,{class:"card",draggable:"true",ondragstart:"drag(event)"});
             card.setAttribute("card-id", `${new Date().getTime()}`) //kortet får ett unikt attribut så att vi inte skapar dubbletter.
-            card.setAttribute("draggable", "true");
-            card.setAttribute("ondragstart", "drag(event)");
-            card.setAttribute("id", this.cardNr += 1);
 
+            //Skapa edit, delete knapp på kortet och paragraf.
             const button = document.createElement("button");
             button.setAttribute("class", "delete-card-btn");
             button.innerText = "X";
@@ -110,31 +144,37 @@ export const page = {
             eventHandlers.addEditCardEventHandler(editButton);
 
             const par = document.createElement("p");
-            par.setAttribute("class", "card-description noDrop");
+            par.setAttribute("class", "card-description");
             par.innerText = ``;
             card.append(button, par, editButton);
-            console.log(e.target.parentNode.childNodes[2]);
-            console.log(e.target.parentNode.childNodes);
             e.target.parentNode.insertBefore(card, e.target.parentNode.childNodes[2]);
-
-            const dropZoneDiv = document.createElement("div");
-            dropZoneDiv.setAttribute("ondrop","drop(event)");
-            dropZoneDiv.setAttribute("ondragover","allowDrop(event)");
-            dropZoneDiv.setAttribute("class","dropZoneDiv");
-
-            e.target.parentNode.insertBefore(dropZoneDiv,card);
-
+            
+            //Vid kort skapande, vill vi hamna i samma läge som när man trycker på edit knappen på en existerande kort.
             editButton.click();
+        }
+    },
+    renderBoardFromSavedCards: function (board) {
+        //tar inga argument... jämför cardsOrder-objektet med board-objektet och renderar board page i rätt ordning
+        const boardColumnsElements = document.getElementsByClassName("column");
+        const cardsOrder = data.getCardsOrderFromLocalStorage();
+        if (board) {
+            Object.keys(cardsOrder).forEach(column => {
+                Object.keys(cardsOrder[column]).forEach(index => {
+                    Object.keys(board).forEach(k => {
+                        if (board[k].id === cardsOrder[column][index]["cardId"]) {
+                            const [cardElement, column, id] = this.createCardFromSaved(board[k]);
+                            this.addCardToBoardFromSaved(cardElement, column, id, boardColumnsElements);
+                        }
+                    })
+                })
+            })
         }
     },
     createCardFromSaved: function (card) {
         const element = document.createElement("div");
-        element.setAttribute("class", "card");
 
+        this.setMultipleAttributes(element,{class:"card",draggable:"true",ondragstart:"drag(event)"})
         element.setAttribute("card-id", `${card.id}`);
-        element.setAttribute("draggable", "true");
-        element.setAttribute("ondragstart", "drag(event)");
-        element.setAttribute("id", this.cardNr += 1);
 
         const button = document.createElement("button");
         button.setAttribute("class", "delete-card-btn");
@@ -157,21 +197,14 @@ export const page = {
             if (column === boardColumnElements[k].children[0].children[0].innerText) {
                 boardColumnElements[k].getElementsByClassName("enter-card")[0].append(cardElement);
             }
-
-
         })
     },
     deleteCard: function (e) {
         if (page.editing) {
-            console.log(e.target.parentNode.parentNode);
-            console.log(e.target.parentNode);
             let editOverlay = document.getElementById("editOverlay") != null ?  document.getElementById("editOverlay") : e.target.parentNode;
             editOverlay.remove();
         }
-        console.log(e.target);
-        //e.target.parentNode.previousSibling.remove();
         e.target.parentNode.remove();
-
         page.editing = false;
 
     },
@@ -187,7 +220,7 @@ export const page = {
             
             let editOverlay = document.createElement("div");
             editOverlay.setAttribute("id", "editOverlay");
-            console.log(e.target.parentNode.parentNode);
+
             e.target.parentNode.parentNode.append(editOverlay);
             editOverlay.addEventListener("click", function () {
                 saveCard();
@@ -245,25 +278,9 @@ export const page = {
         page.renderBoardFromSavedCards(data.getCardsFromLocalStorage());
         eventHandlers.addOnLogoutBtnClickEventHandlers();
     },
-    renderBoardFromSavedCards: function (board) {
-        //tar inga argument... jämför cardsOrder-objektet med board-objektet och renderar board page i rätt ordning
-        const boardColumnsElements = document.getElementsByClassName("column");
-        const cardsOrder = data.getCardsOrderFromLocalStorage();
-        if (board) {
-            Object.keys(cardsOrder).forEach(column => {
-                Object.keys(cardsOrder[column]).forEach(index => {
-                    Object.keys(board).forEach(k => {
-                        if (board[k].id === cardsOrder[column][index]["cardId"]) {
-                            const [cardElement, column, id] = this.createCardFromSaved(board[k]);
-                            this.addCardToBoardFromSaved(cardElement, column, id, boardColumnsElements);
-                        }
-                    })
-                })
-            })
-        }
+    setMultipleAttributes: function(element,attributes) { //hjälp funktion för att sätta flera attribut på samma gång
+        Object.keys(attributes).forEach(key=> element.setAttribute(key,attributes[key]));
     },
     creatingNewCard: false,
     editing: new Boolean(false),
-    cardNr: 0
-
 }
