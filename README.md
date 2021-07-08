@@ -1,4 +1,16 @@
-# Kanban-Meta-Grupp-3
-Gruppuppgift .Net Värnamo Webbapplikationer MVP HT 2020 YTMVP9 Y0376
+# Gruppuppgift: Kanban-Meta-Grupp-3
+## En gruppuppgift i kursen Webbapplikation MVP .Net från utbildningen Webbutuvecklare .NET HT 2020 
+
+### Resultatet som visas här är så långt gruppen hann med uppgiften under den tilldelade perioden för uppgiften dvs v.41-42.
 
 Länk till grupparbetet: https://kerstinmarie.github.io/Kanban-Meta-Grupp-3/
+
+### Uppgiftens syfte:
+Att utveckla ett projektverktyg för grupp genom att lära sig att arbeta med ett projektverktyg i grupp.
+
+### Kravspecifikation Kanban Meta
+
+* Kanban brädan skall bestå av 4 kolumner, "Todo", "Doing", "Test", "Done",
+* Man skall kunna logga in på verktyget,
+* Inloggad så skall man kunna skapa nya "kort" samt ändra och flytta de som finns,
+* Samtliga gruppmedlemmar samt Janne skall ha en egen inloggning till verktyget, (user: janne, lösenord: test).
