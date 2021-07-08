@@ -14,3 +14,5 @@ Att utveckla ett projektverktyg för grupp genom att lära sig att arbeta med et
 * Man skall kunna logga in på verktyget,
 * Inloggad så skall man kunna skapa nya "kort" samt ändra och flytta de som finns,
 * Samtliga gruppmedlemmar samt Janne skall ha en egen inloggning till verktyget, (user: janne, lösenord: test).
+
+Originalet av uppgiften finns här: https://github.com/anthonwellsjo/Kanban-Meta-Grupp-3
