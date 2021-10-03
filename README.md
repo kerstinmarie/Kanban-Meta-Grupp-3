@@ -1,5 +1,5 @@
 # Gruppuppgift: Kanban-Meta-Grupp-3
-## En gruppuppgift i kursen Webbapplikation MVP .Net från utbildningen Webbutvecklare .NET HT 2020 
+## En gruppuppgift i kursen Webbapplikation MVP från utbildningen Webbutvecklare .NET HT 2020 
 
 ### Resultatet som visas här är så långt gruppen hann med uppgiften under den tilldelade perioden för uppgiften dvs v.41-42.
 
